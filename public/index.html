@@ -1,197 +1,187 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" data-pal="diario">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Voces de Tocopilla</title>
+<meta name="description" content="Revista virtual de los cuartos medios del Liceo Politécnico Diego Portales de Tocopilla.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Special+Elite&family=UnifrakturCook:wght@700&display=swap">
 <style>
-html{color-scheme:light}[hidden]{display:none!important}body{margin:0}img{max-width:100%}
-/* Revista vertical: páginas apiladas en una columna, barra fija arriba con la numeración y el cambio entre escribir y leer. Azul puerto, naranja de boya, verde mar. */
+/* Diario obrero del salitre: páginas de prensa sobre una mesa, una sola tinta roja, fotos en blanco y negro, columnas en modo leer */
 :root{
-  --bg:#DCE4E3; --paper:#F4F7F6; --ink:#10262F; --muted:#586C72; --line:#C6D3D2;
-  --orange:#D9481D; --teal:#17757C; --gold:#9A6F10; --plum:#6A4C86;
-  --cover:#0E2A38; --cover-ink:#F2F6F5; --cover-mute:#8FB0B8;
-  --ok:#1F7A4D; --warn:#A5610A; --bad:#B3261E;
-  --shadow:0 1px 2px rgba(16,38,47,.12),0 14px 32px rgba(16,38,47,.14);
-  --f-display:'Big Shoulders Display','Arial Narrow',Impact,sans-serif;
-  --f-body:'Newsreader',Georgia,'Times New Roman',serif;
+  --k:1;
+  --bg:#CDC4AB; --paper:#E8E0CA; --ink:#1C1A16; --muted:#5C5545; --faint:#B2A88B; --red:#B3201D;
+  --bar:#1C1A16; --bar-ink:#E8E0CA; --ok:#2F6B3A; --warn:#8A5A00; --bad:#B3201D;
+  --f-black:'UnifrakturCook','Old English Text MT',Georgia,serif;
+  --f-head:'Old Standard TT',Georgia,'Times New Roman',serif;
+  --f-sc:'IM Fell English SC',Georgia,serif;
+  --f-type:'Special Elite','Courier New',monospace;
+  --noise:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .28  0 0 0 0 .22  0 0 0 0 .12  0 0 0 .11 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  color-scheme:light;
 }
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#08141A; --paper:#122933; --ink:#E6EEED; --muted:#98ADB1; --line:#2A4651;
-    --orange:#FF7A4D; --teal:#4FC1C8; --gold:#E3B04B; --plum:#B79AD6;
-    --cover:#0A1F2A; --cover-ink:#F2F6F5; --cover-mute:#7FA3AC;
-    --ok:#5ED39A; --warn:#F0B24A; --bad:#FF8A80;
-    --shadow:0 1px 2px rgba(0,0,0,.4),0 14px 32px rgba(0,0,0,.45);
-    color-scheme:dark;
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#08141A; --paper:#122933; --ink:#E6EEED; --muted:#98ADB1; --line:#2A4651;
-  --orange:#FF7A4D; --teal:#4FC1C8; --gold:#E3B04B; --plum:#B79AD6;
-  --cover:#0A1F2A; --cover-ink:#F2F6F5; --cover-mute:#7FA3AC;
-  --ok:#5ED39A; --warn:#F0B24A; --bad:#FF8A80;
-  --shadow:0 1px 2px rgba(0,0,0,.4),0 14px 32px rgba(0,0,0,.45);
-  color-scheme:dark;
-}
+html[data-pal="blanco"]{ --bg:#D5D5D1; --paper:#F7F5EF; --faint:#C9C5B8; --muted:#57534A; }
+html[data-pal="noche"]{ --bg:#0E0D0A; --paper:#211E18; --ink:#E9E0C8; --muted:#A79E85; --faint:#4B4536; --red:#E5605A;
+  --bar:#E9E0C8; --bar-ink:#1C1A16; --ok:#7CCB8A; --warn:#E7B04A; --bad:#FF8A80; color-scheme:dark; }
 *{box-sizing:border-box}
-body{
-  background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.55;
-  padding-left:max(16px,env(safe-area-inset-left,0px));
-  padding-right:max(16px,env(safe-area-inset-right,0px));
-  padding-block:0 64px;
-}
-.wrap{max-width:720px;margin:0 auto}
-button{font:inherit;color:inherit;cursor:pointer}
+html{font-size:calc(17px * var(--k));-webkit-text-size-adjust:100%}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-head);font-size:1rem;line-height:1.6;
+  padding-left:max(14px,env(safe-area-inset-left,0px));padding-right:max(14px,env(safe-area-inset-right,0px));padding-block:0 4rem}
+img{max-width:100%}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+.wrap{max-width:760px;margin:0 auto}
 
-/* barra superior */
-.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;background:var(--cover);color:var(--cover-ink);
-  padding:10px 14px 10px;border-radius:0 0 12px 12px;display:grid;grid-template-columns:minmax(0,1fr);gap:8px;box-shadow:var(--shadow)}
+/* barra de la imprenta */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;background:var(--bar);color:var(--bar-ink);padding:.55rem .8rem .6rem;
+  display:grid;grid-template-columns:minmax(0,1fr);gap:.5rem;border-bottom:3px double var(--bar-ink);box-shadow:0 3px 0 rgba(0,0,0,.25);font-family:var(--f-type);font-size:.8rem}
 .bar>*{min-width:0}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--cover)}
-.bar-top{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;justify-content:space-between}
-.mast{display:flex;align-items:baseline;gap:10px;min-width:0}
-.mast b{font-family:var(--f-display);font-weight:900;letter-spacing:.06em;text-transform:uppercase;font-size:20px;line-height:1}
-.status{font-size:13px;color:var(--cover-mute);display:flex;align-items:center;gap:6px}
-.status i{width:8px;height:8px;border-radius:50%;background:var(--ok);display:inline-block}
-.status[data-s="saving"] i{background:var(--warn)}
-.status[data-s="error"] i{background:var(--bad)}
-.tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.seg{display:inline-flex;border:1px solid var(--cover-mute);border-radius:999px;overflow:hidden}
-.seg button{background:transparent;border:0;padding:5px 14px;font-family:var(--f-display);font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:14px;color:var(--cover-ink)}
-.seg button[aria-pressed="true"]{background:var(--orange);color:#fff}
-.dl{background:transparent;border:1px solid var(--cover-mute);border-radius:999px;padding:5px 14px;font-family:var(--f-display);font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:14px;color:var(--cover-ink)}
-button:focus-visible,select:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
-.chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bar)}
+.bar-top{display:flex;flex-wrap:wrap;gap:.4rem .9rem;align-items:center;justify-content:space-between}
+.mast{display:flex;align-items:baseline;gap:.7rem;flex-wrap:wrap}
+.mast b{font-family:var(--f-black);font-weight:700;font-size:1.55rem;line-height:1}
+.status{display:flex;align-items:center;gap:.4rem;opacity:.85}
+.status i{width:.55rem;height:.55rem;background:var(--ok);display:inline-block}
+.status[data-s="saving"] i{background:var(--warn)} .status[data-s="error"] i{background:var(--bad)}
+.tools{display:flex;gap:.35rem;flex-wrap:wrap;align-items:center}
+.btn{background:transparent;border:1px solid var(--bar-ink);padding:.25rem .6rem;font-family:var(--f-type);font-size:.8rem;color:var(--bar-ink);line-height:1.2}
+.btn[aria-pressed="true"]{background:var(--bar-ink);color:var(--bar)}
+.btn:disabled{opacity:.35;cursor:default}
+.btn:focus-visible,select:focus-visible,.toc button:focus-visible,.chip:focus-visible,.clave input:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.chips{display:flex;gap:.3rem;overflow-x:auto;padding-bottom:.15rem;scrollbar-width:none}
 .chips::-webkit-scrollbar{display:none}
-.chip{flex:0 0 auto;min-width:34px;height:30px;border-radius:6px;border:1px solid var(--cover-mute);background:transparent;color:var(--cover-ink);
-  font-family:var(--f-display);font-weight:800;font-size:15px;position:relative;padding:0 8px}
-.chip.has{border-color:var(--teal);box-shadow:inset 0 -3px 0 var(--teal)}
-.sub-bar{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:13px;color:var(--cover-mute);align-items:center;justify-content:space-between}
-.sub-bar strong{color:var(--cover-ink);font-weight:600}
+.chip{flex:0 0 auto;min-width:2rem;height:1.8rem;border:1px solid var(--bar-ink);background:transparent;color:var(--bar-ink);font-family:var(--f-type);font-size:.85rem;padding:0 .4rem;position:relative}
+.chip.has::after{content:"";position:absolute;left:.3rem;right:.3rem;bottom:.18rem;height:2px;background:var(--bar-ink)}
+.sub-bar{display:flex;flex-wrap:wrap;gap:.2rem 1rem;justify-content:space-between;opacity:.85}
+.clave{display:flex;gap:.3rem}
+.clave input{background:transparent;border:1px solid var(--bar-ink);color:var(--bar-ink);padding:.25rem .5rem;font-family:var(--f-type);font-size:.8rem;width:9.5rem;border-radius:0}
+.clave input::placeholder{color:var(--bar-ink);opacity:.6}
+.note{margin:1.1rem 0 0;padding:.7rem .9rem;border:1px dashed var(--ink);background:var(--paper);font-family:var(--f-type);font-size:.85rem}
 
-.note{margin:18px 0 0;padding:12px 16px;border-left:4px solid var(--orange);background:var(--paper);box-shadow:var(--shadow);font-size:15px}
-
-/* páginas */
-.pages{display:grid;grid-template-columns:minmax(0,1fr);gap:30px;margin-top:22px}
+/* hojas */
+.pages{display:grid;grid-template-columns:minmax(0,1fr);gap:2rem;margin-top:1.4rem}
 .pages>*{min-width:0}
-.sheet{--acc:var(--ink);background:var(--paper);box-shadow:var(--shadow);width:100%;aspect-ratio:210/297;position:relative;
-  padding:30px 44px 64px;display:flex;flex-direction:column;gap:16px;scroll-margin-top:130px}
-.sheet[data-c="o"]{--acc:var(--orange)} .sheet[data-c="t"]{--acc:var(--teal)}
-.sheet[data-c="g"]{--acc:var(--gold)} .sheet[data-c="p"]{--acc:var(--plum)}
-.rh{display:flex;justify-content:space-between;gap:12px;font-family:var(--f-display);font-weight:600;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
-  border-bottom:2px solid var(--ink);padding-bottom:7px}
-.rh span:last-child{color:var(--acc);font-weight:800;text-align:right}
-.folio{position:absolute;bottom:16px;left:0;right:0;display:flex;justify-content:center;align-items:baseline;gap:8px;font-family:var(--f-display);font-weight:800;color:var(--muted);font-size:20px}
-.folio::before,.folio::after{content:"";width:34px;height:2px;background:var(--acc);align-self:center}
-.kick{font-family:var(--f-display);font-weight:800;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:var(--acc)}
-.body{display:flex;flex-direction:column;gap:16px;flex:1}
+.sheet{background-color:var(--paper);background-image:var(--noise);box-shadow:3px 3px 0 rgba(0,0,0,.25),0 0 0 1px var(--faint);width:100%;aspect-ratio:210/297;
+  padding:1.3rem 2.1rem 3.4rem;position:relative;display:flex;flex-direction:column;gap:.9rem;scroll-margin-top:9rem}
+.rh{display:grid;grid-template-columns:1fr auto 1fr;gap:.6rem;align-items:baseline;border-bottom:3px double var(--ink);padding-bottom:.3rem;font-family:var(--f-sc);font-size:.9rem}
+.rh .brand{font-family:var(--f-black);font-size:1.4rem;line-height:1}
+.rh .sec{text-align:center;color:var(--red)}
+.rh .pg{text-align:right;font-family:var(--f-type);font-size:.8rem}
+.folio{position:absolute;bottom:1rem;left:0;right:0;text-align:center;font-family:var(--f-type);font-size:.85rem;color:var(--muted)}
+.kick{font-family:var(--f-sc);font-size:1rem;letter-spacing:.05em;color:var(--red);border-bottom:1px solid var(--ink);padding-bottom:.15rem}
+.body{display:flex;flex-direction:column;gap:.9rem;flex:1}
 
 /* campos */
-.fld{display:grid;gap:3px}
-.fld>label{font-family:var(--f-display);font-weight:600;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.fld{display:grid;gap:.15rem}
+.fld>label{font-family:var(--f-type);font-size:.74rem;color:var(--muted)}
+.fld>label::before{content:"› "}
 .read .fld>label{display:none}
-.fld.sub>label{font-weight:900;font-size:19px;letter-spacing:.06em;color:var(--acc);display:block;border-top:2px solid var(--acc);padding-top:6px}
-textarea,select{width:100%;border:0;background:transparent;color:inherit;font:inherit;padding:2px 0;resize:none;overflow:hidden;display:block;border-radius:2px}
-textarea::placeholder{color:var(--muted);opacity:.7}
-.edit textarea{border-bottom:1px dashed var(--line)}
-.edit textarea:hover{border-bottom-color:var(--acc)}
-textarea:focus-visible{outline:2px solid var(--acc);outline-offset:3px;border-bottom-color:transparent}
+.fld.sub>label{display:block;font-family:var(--f-sc);font-size:1.2rem;color:var(--red);border-top:1px solid var(--ink);padding-top:.25rem;margin-top:.2rem}
+.fld.sub>label::before{content:""}
+.read .fld.sub>label{display:block}
+textarea,select{width:100%;border:0;background:transparent;font:inherit;color:inherit;padding:.1rem 0;resize:none;overflow:hidden;display:block;border-radius:0}
+textarea::placeholder{color:var(--muted);opacity:.65}
+.edit textarea{border-bottom:1px dashed var(--faint)}
+.edit textarea:hover{background:rgba(255,255,255,.16)}
+textarea:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.edit .fld.sub textarea:focus-visible{outline-offset:2px}
 .read .fld.empty{display:none}
-.read textarea{border-bottom:0;pointer-events:none}
-select{border-bottom:1px dashed var(--line);font-family:var(--f-display);font-weight:800;letter-spacing:.1em;text-transform:uppercase;font-size:15px;color:var(--acc);padding:4px 0}
+.print{display:none;white-space:pre-wrap;overflow-wrap:anywhere}
+.print[data-pre]:not([data-pre=""])::before{content:attr(data-pre)}
+.read textarea{display:none}
+.read .print{display:block}
 .read select{border:0;appearance:none;pointer-events:none}
-select option{color:#10262F;background:#fff;text-transform:none;font-family:var(--f-body)}
-.t-title{font-family:var(--f-display);font-weight:900;text-transform:uppercase;font-size:clamp(34px,8vw,54px);line-height:.95;letter-spacing:.01em}
-.t-sub{font-style:italic;font-size:20px;line-height:1.35;color:var(--muted)}
-.t-body{font-size:17px;line-height:1.62}
-.t-cap{font-size:14px;color:var(--muted);font-style:italic}
-.t-quest{font-family:var(--f-display);font-weight:800;font-size:clamp(24px,5vw,32px);line-height:1.05;color:var(--acc)}
-.t-name{font-family:var(--f-display);font-weight:800;font-size:17px;letter-spacing:.08em;text-transform:uppercase}
-.wc{font-size:13px;font-family:var(--f-display);font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+select{border-bottom:1px dashed var(--faint);font-family:var(--f-sc);font-size:1.2rem;color:var(--red);padding:.2rem 0}
+select option{color:#1C1A16;background:#fff}
+.t-title{font-family:var(--f-head);font-weight:700;font-size:clamp(2rem,6.4vw,3.2rem);line-height:1.03;letter-spacing:-.01em;text-wrap:balance;text-shadow:0 0 .6px currentColor}
+.t-sub{font-style:italic;font-size:1.2rem;line-height:1.35;color:var(--muted)}
+.t-body{font-size:1rem;line-height:1.6;hyphens:auto}
+.read .print.t-body{text-align:justify}
+.t-cap{font-family:var(--f-type);font-size:.8rem;line-height:1.45;color:var(--muted)}
+.t-quest{font-family:var(--f-head);font-weight:700;font-style:italic;font-size:clamp(1.45rem,4.6vw,2.05rem);line-height:1.12;color:var(--red)}
+.t-name{font-family:var(--f-sc);font-size:1.05rem;letter-spacing:.04em}
+@media (min-width:640px){ .print.cols{column-count:2;column-gap:1.7rem;column-rule:1px solid var(--ink)} }
+.print.cap::first-letter{float:left;font-family:var(--f-black);font-size:4.1em;line-height:.78;padding:.05em .09em 0 0;color:var(--red)}
+.wc{font-family:var(--f-type);font-size:.78rem}
 .wc[data-s="low"]{color:var(--warn)} .wc[data-s="ok"]{color:var(--ok)} .wc[data-s="high"]{color:var(--bad)} .wc[data-s="zero"]{color:var(--muted)}
 .read .wc{display:none}
-.trio{display:grid;gap:14px}
-.col4{display:grid;gap:8px;padding-top:6px}
+.trio{display:grid;gap:.9rem}
+.col4{display:grid;gap:.4rem;padding-top:.2rem}
 .read .col4.empty{display:none}
 
-/* imágenes */
-.img{position:relative;width:100%;aspect-ratio:4/3;background:var(--line);overflow:hidden;border-radius:2px;display:grid;place-items:center}
-.img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.img.tall{aspect-ratio:3/4}
-.img .ph{display:grid;gap:6px;justify-items:center;text-align:center;padding:14px;color:var(--muted);font-size:15px}
-.img .ph b{font-family:var(--f-display);font-weight:800;letter-spacing:.1em;text-transform:uppercase;font-size:16px;color:var(--ink)}
-.img .ph button{border:1px dashed var(--muted);background:transparent;border-radius:8px;padding:8px 14px;font-family:var(--f-display);font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:14px;color:var(--ink)}
-.img .rm{position:absolute;right:8px;bottom:8px;background:var(--cover);color:var(--cover-ink);border:0;border-radius:6px;padding:4px 10px;font-size:13px}
+/* fotos en blanco y negro, como salen en la prensa */
+.img{position:relative;width:100%;aspect-ratio:4/3;border:1px solid var(--ink);padding:.3rem;background:var(--paper)}
+.img.tall{aspect-ratio:3/2.3}
+.img .in{position:absolute;inset:.3rem;background:var(--faint);display:grid;place-items:center;overflow:hidden}
+.img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.12) sepia(.22);mix-blend-mode:multiply}
+.img .ph{display:grid;gap:.4rem;justify-items:center;text-align:center;padding:1rem;font-family:var(--f-type);font-size:.85rem;color:var(--muted)}
+.img .ph b{font-family:var(--f-sc);font-weight:400;font-size:1.1rem;color:var(--ink)}
+.img .ph button{border:1px dashed var(--ink);background:transparent;padding:.35rem .8rem;font-family:var(--f-type);font-size:.82rem;color:var(--ink)}
+.img .rm{position:absolute;right:.8rem;bottom:.8rem;background:var(--ink);color:var(--paper);border:0;padding:.2rem .6rem;font-family:var(--f-type);font-size:.75rem}
 .read .img.noimg{display:none}
 .read .img .rm,.read .img .ph button{display:none}
 
-/* guía */
-.guide{margin-top:auto;border-top:1px solid var(--line);padding-top:10px;font-size:14.5px;color:var(--muted)}
-.guide summary{cursor:pointer;font-family:var(--f-display);font-weight:800;letter-spacing:.12em;text-transform:uppercase;font-size:13px;color:var(--acc)}
-.guide ul{margin:8px 0 0;padding-left:20px;display:grid;gap:4px}
+.guide{margin-top:auto;border:1px dashed var(--ink);padding:.5rem .7rem;font-family:var(--f-type);font-size:.78rem;color:var(--muted)}
+.guide summary{cursor:pointer;color:var(--ink)}
+.guide ul{margin:.5rem 0 0;padding-left:1.1rem;display:grid;gap:.25rem}
 .read .guide{display:none}
 
 /* portada */
-.sheet.cover{background:var(--cover);color:var(--cover-ink);padding-top:34px;overflow:hidden}
-.cover .rh{border-color:var(--cover-ink);color:var(--cover-mute)}
-.cover .fld>label{color:var(--cover-mute)}
-.cover textarea{color:var(--cover-ink)}
-.cover textarea::placeholder{color:var(--cover-mute)}
-.cover .edit textarea,.edit .cover textarea{border-bottom-color:rgba(143,176,184,.45)}
-.logo{font-family:var(--f-display);font-weight:900;text-transform:uppercase;line-height:.84;font-size:clamp(66px,17vw,122px);letter-spacing:-.005em;margin:2px 0 0}
-.logo em{font-style:normal;color:var(--orange);display:block;font-size:.42em;letter-spacing:.3em;line-height:1.2}
-.cover .t-title{color:var(--cover-ink);font-size:clamp(28px,6vw,40px)}
-.cover .t-sub{color:var(--cover-mute)}
-.cover .img{background:rgba(143,176,184,.18)}
-.cover .img .ph{color:var(--cover-mute)} .cover .img .ph b{color:var(--cover-ink)} .cover .img .ph button{color:var(--cover-ink);border-color:var(--cover-mute)}
-.cover .t-name,.cover .t-body{color:var(--cover-ink)}
-.waves{position:absolute;left:0;right:0;bottom:0;height:34px;background:repeating-linear-gradient(0deg,var(--teal) 0 2px,transparent 2px 7px);opacity:.55}
+.dateline{display:grid;grid-template-columns:auto 1fr auto;gap:.7rem;align-items:center;border-top:3px double var(--ink);border-bottom:1px solid var(--ink);padding:.2rem 0;font-family:var(--f-sc);font-size:.88rem}
+.dateline .fld{margin:0}
+.dateline textarea,.dateline .print{text-align:center;font-family:var(--f-sc);font-size:.88rem}
+.logo{font-family:var(--f-black);font-weight:700;font-size:clamp(3.1rem,15vw,6rem);line-height:.92;text-align:center;margin:.3rem 0 0;text-shadow:0 0 .8px currentColor}
+.tag{text-align:center;font-family:var(--f-sc);font-size:.95rem;letter-spacing:.04em;border-bottom:3px double var(--ink);padding-bottom:.45rem}
+.cover .t-title{text-align:center;font-size:clamp(1.9rem,7vw,3.3rem)}
+.cover .t-sub{text-align:center}
+.cover textarea,.cover .print{text-align:inherit}
+.cover .body{position:relative}
+.stamp{position:absolute;right:.2rem;top:-1.5rem;transform:rotate(-7deg);border:3px solid var(--red);color:var(--red);font-family:var(--f-type);font-size:.95rem;padding:.15rem .6rem;letter-spacing:.08em;text-transform:uppercase;opacity:.85;mix-blend-mode:multiply;pointer-events:none;z-index:2}
+.adentro{border:1px solid var(--ink);padding:.5rem .8rem;font-size:.9rem}
+.adentro h3{margin:0 0 .25rem;font-family:var(--f-sc);font-weight:400;font-size:1.05rem;color:var(--red)}
+.adentro ul{margin:0;padding:0;list-style:none;display:grid;gap:.1rem}
+.adentro li{display:flex;gap:.5rem;line-height:1.35}
+.adentro li b{font-family:var(--f-type);font-weight:400;font-size:.8rem;min-width:2.4rem;color:var(--muted)}
 
 /* índice */
-.toc{display:grid;gap:0;margin:0;padding:0;list-style:none}
-.toc button{all:unset;box-sizing:border-box;width:100%;cursor:pointer;display:grid;grid-template-columns:auto 1fr;gap:4px 14px;padding:12px 0;border-bottom:1px solid var(--line);align-items:baseline}
-.toc button:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
-.toc .n{font-family:var(--f-display);font-weight:900;font-size:38px;line-height:1;color:var(--ink);min-width:44px}
-.toc .s{font-family:var(--f-display);font-weight:800;font-size:13px;letter-spacing:.14em;text-transform:uppercase}
-.toc .tt{grid-column:2;font-size:19px;line-height:1.25}
-.toc .tt.pend{color:var(--muted);font-style:italic}
-.toc .s{grid-column:2}
-.toc li[data-c="o"] .s{color:var(--orange)} .toc li[data-c="t"] .s{color:var(--teal)} .toc li[data-c="g"] .s{color:var(--gold)} .toc li[data-c="p"] .s{color:var(--plum)}
+.toc{margin:0;padding:0;list-style:none}
+.toc button{all:unset;box-sizing:border-box;width:100%;cursor:pointer;display:grid;grid-template-columns:1fr auto;gap:0 .5rem;padding:.7rem 0;border-bottom:1px solid var(--faint);align-items:baseline}
+.toc .tt{font-size:1.2rem;line-height:1.25;font-weight:700}
+.toc .tt.pend{font-weight:400;font-style:italic;color:var(--muted)}
+.toc .s{grid-column:1;font-family:var(--f-sc);color:var(--red);font-size:.9rem}
+.toc .n{grid-column:2;grid-row:1 / span 2;font-family:var(--f-black);font-size:2.2rem;line-height:1;align-self:center}
 
-.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));background:var(--cover);color:var(--cover-ink);padding:10px 16px;border-radius:8px;font-size:15px;z-index:20;max-width:calc(100% - 32px)}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(1.2rem + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--paper);padding:.6rem 1rem;font-family:var(--f-type);font-size:.85rem;z-index:20;max-width:calc(100% - 2rem)}
 
 @media (max-width:560px){
-  .sheet{padding:22px 20px 60px}
-  .t-body{font-size:16.5px}
+  .sheet{padding:1.1rem 1.1rem 3.2rem}
+  .rh{grid-template-columns:auto 1fr auto}
+  .dateline{grid-template-columns:1fr;text-align:center}
+  .stamp{top:-2.5rem;font-size:.78rem}
 }
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
-.clave{display:flex;gap:6px}
-.clave input{border:1px solid var(--cover-mute);background:transparent;color:var(--cover-ink);border-radius:999px;padding:5px 12px;font:inherit;font-size:14px;width:150px}
-.clave input::placeholder{color:var(--cover-mute)}
-.clave button{background:var(--orange);color:#fff;border:0;border-radius:999px;padding:5px 14px;font-family:var(--f-display);font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:14px}
 </style>
 </head>
-<body>
+<body class="read">
 
 <div class="wrap">
   <header class="bar">
     <div class="bar-top">
       <div class="mast"><b>Voces de Tocopilla</b><span class="status" id="status" data-s="ok"><i></i><span id="statusTxt">Conectando</span></span></div>
       <div class="tools">
-        <div class="seg" role="group" aria-label="Modo">
-          <button type="button" id="mEdit" aria-pressed="true">Escribir</button>
-          <button type="button" id="mRead" aria-pressed="false">Leer</button>
-        </div>
-        <form class="clave" id="claveForm" hidden><input id="clave" type="password" placeholder="Clave del equipo" autocomplete="off" aria-label="Clave del equipo"><button type="submit">Entrar</button></form>
-        <button type="button" class="dl" id="dl">Bajar texto</button>
+        <button type="button" class="btn" id="mEdit" aria-pressed="false">Escribir</button>
+        <button type="button" class="btn" id="mRead" aria-pressed="true">Leer</button>
+        <button type="button" class="btn" id="aMenos" aria-label="Letra más chica">A−</button>
+        <button type="button" class="btn" id="aMas" aria-label="Letra más grande">A+</button>
+        <button type="button" class="btn" id="palBtn" aria-label="Cambiar el papel">Papel de diario</button>
+        <button type="button" class="btn" id="dl">Bajar texto</button>
       </div>
     </div>
+    <form class="clave" id="claveForm" hidden><input id="clave" type="password" placeholder="Clave del equipo" autocomplete="off" aria-label="Clave del equipo"><button type="submit" class="btn">Entrar</button></form>
     <nav class="chips" id="chips" aria-label="Páginas"></nav>
-    <div class="sub-bar"><span id="prog"><strong>0 de 9</strong> páginas con texto</span><span>Entrega final viernes 30 de octubre</span></div>
+    <div class="sub-bar"><span id="prog">0 de 9 páginas con texto</span><span>Entrega final el viernes 30 de octubre</span></div>
   </header>
   <div class="note" id="note" hidden></div>
   <main class="pages" id="pages"></main>
@@ -200,52 +190,52 @@ select option{color:#10262F;background:#fff;text-transform:none;font-family:var(
 
 <script>
 const PAGES = [
-  {n:1, id:'p1', cover:true, sec:'Portada', c:'n', fields:[
-    {k:'numero',t:'line',label:'Número y fecha',ph:'Número 1, octubre 2026',cls:'t-name'},
-    {k:'img',t:'img',label:'Foto de portada',ph:'Una foto de Tocopilla o del equipo',tall:true},
-    {k:'titulo',t:'line',label:'Título del número',ph:'Por ejemplo: Vivir y trabajar con dignidad en Tocopilla',cls:'t-title'},
-    {k:'bajada',t:'line',label:'Frase de portada',ph:'Una frase corta que invite a leer',cls:'t-sub'},
-    {k:'integrantes',t:'text',label:'Integrantes y roles',ph:'Un integrante por línea, con su rol',cls:'t-body',rows:4}
+  {n:1, id:'p1', cover:true, sec:'Portada', fields:[
+    {k:'numero',t:'line',label:'Edición y fecha',ph:'N.º 1 · Tocopilla, 30 de octubre de 2026'},
+    {k:'titulo',t:'line',label:'Titular de portada',ph:'El titular grande de este número',cls:'t-title'},
+    {k:'bajada',t:'line',label:'Bajada de portada',ph:'Una frase corta que invite a leer',cls:'t-sub'},
+    {k:'img',t:'img',label:'Foto de portada',ph:'Una foto de Tocopilla o del equipo'},
+    {k:'integrantes',t:'text',label:'Redacción',ph:'Un integrante por línea, con su rol',cls:'t-body',rows:4,sub:true}
   ], guide:[
     'Nombre de la revista, título del número e imagen que tenga que ver con la ciudad y con el equipo.',
     'Pongan a los cuatro integrantes con su rol: director o directora editorial, periodista de investigación, analista de riesgos y editor o editora de diseño.'
   ]},
-  {n:2, id:'p2', index:true, sec:'Índice', c:'n', fields:[], guide:[
-    'El índice se arma solo con los títulos que escriban en cada página. Si una página no tiene título, aparece como pendiente.'
+  {n:2, id:'p2', index:true, sec:'Índice', fields:[], guide:[
+    'El índice se arma solo con los títulos que escriban en cada página. Si una página no tiene título, sale como pendiente.'
   ]},
-  {n:3, id:'p3', sec:'Editorial', kick:'Lengua y Literatura · Editorial', c:'o', tk:'titular', fields:[
+  {n:3, id:'p3', sec:'Editorial', kick:'Lengua y Literatura · Editorial', tk:'titular', fields:[
     {k:'titular',t:'line',label:'Título de la editorial',ph:'Un título con postura',cls:'t-title'},
-    {k:'texto',t:'text',label:'Editorial',ph:'Escriban la postura del equipo sobre cómo vivir y trabajar de forma digna y segura en Tocopilla.',cls:'t-body',rows:14,words:[300,400]},
-    {k:'firma',t:'line',label:'Firma',ph:'Equipo editorial, 4° Medio',cls:'t-name'}
+    {k:'texto',t:'text',label:'Editorial',ph:'Escriban la postura del equipo sobre cómo vivir y trabajar de forma digna y segura en Tocopilla.',cls:'t-body',rows:14,words:[300,400],cap:true},
+    {k:'firma',t:'line',label:'Firma',ph:'Equipo editorial, 4° Medio',cls:'t-name',pre:'— '}
   ], guide:[
     'Entre 300 y 400 palabras con la postura del equipo sobre cómo vivir y trabajar de forma digna y segura en Tocopilla.',
     'Antes de escribir, definan propósito, audiencia, género, tema y esquema en la ficha de planificación.',
     'Cuiden la coherencia y la cohesión, con conectores variados.'
   ]},
-  {n:4, id:'p4', sec:'Ciencias para la Ciudadanía', kick:'Ciencias para la Ciudadanía · Tocopilla preparada', c:'t', tk:'titular', fields:[
+  {n:4, id:'p4', sec:'Ciencias para la Ciudadanía', kick:'Ciencias para la Ciudadanía · Tocopilla preparada', tk:'titular', fields:[
     {k:'titular',t:'line',label:'Título',ph:'Qué hay en el suelo que pisamos',cls:'t-title'},
     {k:'bajada',t:'line',label:'Bajada',ph:'Una o dos líneas que resuman la investigación',cls:'t-sub'},
-    {k:'texto',t:'text',label:'Metales en muestras de suelo',ph:'Qué metales aparecen, de dónde pueden venir y qué efectos tienen en la salud.',cls:'t-body',rows:9,sub:true},
+    {k:'texto',t:'text',label:'Metales en muestras de suelo',ph:'Qué metales aparecen, de dónde pueden venir y qué efectos tienen en la salud.',cls:'t-body',rows:9,sub:true,cap:true},
     {k:'img',t:'img',label:'Foto',ph:'Foto propia del lugar o de la muestra'},
-    {k:'pie',t:'line',label:'Pie de foto',ph:'Qué se ve, dónde y quién la sacó',cls:'t-cap'}
+    {k:'pie',t:'line',label:'Pie de foto',ph:'Qué se ve, dónde y quién la sacó',cls:'t-cap',pre:'Foto: '}
   ], guide:[
     'Investigación sobre la presencia de metales en muestras de suelo.',
     'Expliquen qué muestras se usaron, qué muestran y al menos una limitación con su razón.',
     'El apoyo teórico habla de metales pesados como arsénico, plomo y níquel, que vienen de las termoeléctricas a carbón y del puerto.'
   ]},
-  {n:5, id:'p5', sec:'Ciencias para la Ciudadanía', kick:'Ciencias para la Ciudadanía · Tocopilla preparada', c:'t', tk:'titular', fields:[
+  {n:5, id:'p5', sec:'Ciencias para la Ciudadanía', kick:'Ciencias para la Ciudadanía · Tocopilla preparada', tk:'titular', fields:[
     {k:'titular',t:'line',label:'Título',ph:'Cuando baja la quebrada',cls:'t-title'},
     {k:'bajada',t:'line',label:'Bajada',ph:'Una o dos líneas que resuman',cls:'t-sub'},
-    {k:'texto',t:'text',label:'Aluviones y movimiento de material',ph:'Cómo funciona un aluvión en las quebradas de Tocopilla y qué arrastra.',cls:'t-body',rows:8,sub:true},
+    {k:'texto',t:'text',label:'Aluviones y movimiento de material',ph:'Cómo funciona un aluvión en las quebradas de Tocopilla y qué arrastra.',cls:'t-body',rows:8,sub:true,cap:true},
     {k:'suelo',t:'text',label:'Desplazamiento de suelo y metales',ph:'Cómo un aluvión remueve y dispersa los metales pesados.',cls:'t-body',rows:7,sub:true},
     {k:'img',t:'img',label:'Foto',ph:'Foto propia de una quebrada'},
-    {k:'pie',t:'line',label:'Pie de foto',ph:'Qué se ve, dónde y quién la sacó',cls:'t-cap'}
+    {k:'pie',t:'line',label:'Pie de foto',ph:'Qué se ve, dónde y quién la sacó',cls:'t-cap',pre:'Foto: '}
   ], guide:[
     'Investigación sobre aluviones y movimiento de material, incluido el posible desplazamiento de suelo y metales.',
     'Las quebradas pueden destruir viviendas y dañar las redes de agua y alcantarillado.',
     'Expliquen cómo el aluvión remueve y dispersa los metales pesados.'
   ]},
-  {n:6, id:'p6', sec:'Ciencias para la Ciudadanía', kick:'Ciencias para la Ciudadanía · Tocopilla preparada', c:'t', tk:'titular', fields:[
+  {n:6, id:'p6', sec:'Ciencias para la Ciudadanía', kick:'Ciencias para la Ciudadanía · Tocopilla preparada', tk:'titular', fields:[
     {k:'titular',t:'line',label:'Título',ph:'Qué tan preparados estamos',cls:'t-title'},
     {k:'trio',t:'group',fields:[
       {k:'amenaza',t:'text',label:'Amenaza',ph:'El fenómeno que puede hacer daño, con un ejemplo de Tocopilla.',cls:'t-body',rows:3,sub:true},
@@ -259,9 +249,9 @@ const PAGES = [
     'Analicen un modelo, por ejemplo carta de inundación, mapa de quebradas o maqueta, y expliquen sus limitaciones con razón.',
     'Evalúen las capacidades del liceo, con el PISE, y de la comunidad para la prevención, la mitigación y la adaptación, apoyándose en evidencias como observación, entrevistas o documentos.'
   ]},
-  {n:7, id:'p7', sec:'Ciencias para la Ciudadanía', kick:'Ciencias para la Ciudadanía · Tocopilla preparada', c:'t', tk:'titular', fields:[
+  {n:7, id:'p7', sec:'Ciencias para la Ciudadanía', kick:'Ciencias para la Ciudadanía · Tocopilla preparada', tk:'titular', fields:[
     {k:'titular',t:'line',label:'Título',ph:'Mapa de riesgos y qué podemos hacer',cls:'t-title'},
-    {k:'img',t:'img',label:'Infografía con el mapa de riesgos',ph:'Suban la infografía terminada'},
+    {k:'img',t:'img',label:'Infografía con el mapa de riesgos',ph:'Suban la infografía terminada',tall:true},
     {k:'intro',t:'text',label:'Entrada del artículo',ph:'Presenten el problema en pocas líneas.',cls:'t-body',rows:3},
     {k:'p1',t:'text',label:'Propuesta 1',ph:'Qué se propone, quién lo haría y cómo ayuda.',cls:'t-body',rows:3,sub:true},
     {k:'p2',t:'text',label:'Propuesta 2',ph:'Qué se propone, quién lo haría y cómo ayuda.',cls:'t-body',rows:3,sub:true},
@@ -270,21 +260,21 @@ const PAGES = [
     'Infografía clara y ordenada, con el mapa de las zonas afectadas.',
     'Artículo con al menos tres propuestas de prevención, mitigación o adaptación, que se puedan hacer de verdad y que respondan a las debilidades que encontraron.'
   ]},
-  {n:8, id:'p8', sec:'Voces creativas', kick:'Lengua y Literatura · Voces creativas', c:'o', tk:'titulo', fields:[
+  {n:8, id:'p8', sec:'Voces creativas', kick:'Lengua y Literatura · Voces creativas', tk:'titulo', fields:[
     {k:'genero',t:'select',label:'Género',options:['Crónica','Poema','Microcuento']},
     {k:'titulo',t:'line',label:'Título',ph:'El título de su texto',cls:'t-title'},
-    {k:'texto',t:'text',label:'Texto',ph:'Un texto inspirado en Tocopilla.',cls:'t-body',rows:16},
-    {k:'autor',t:'line',label:'Autor o autora',ph:'Nombre',cls:'t-name'}
+    {k:'texto',t:'text',label:'Texto',ph:'Un texto inspirado en Tocopilla.',cls:'t-body',rows:16,cap:true},
+    {k:'autor',t:'line',label:'Autor o autora',ph:'Nombre',cls:'t-name',pre:'Por '}
   ], guide:[
     'Una crónica, un poema o un microcuento inspirado en Tocopilla.',
     'Es el espacio para jugar con el lenguaje, pero igual pasa por la revisión entre pares.'
   ]},
-  {n:9, id:'p9', sec:'Educación Ciudadana', kick:'Educación Ciudadana · Trabajo digno en Tocopilla', c:'g', tk:'titular', fields:[
+  {n:9, id:'p9', sec:'Educación Ciudadana', kick:'Educación Ciudadana · Trabajo digno en Tocopilla', tk:'titular', fields:[
     {k:'titular',t:'line',label:'Título',ph:'Trabajar con dignidad en Tocopilla',cls:'t-title'},
-    {k:'actividades',t:'text',label:'Cómo se trabaja hoy',ph:'Las principales actividades laborales de la ciudad, con datos y fuentes.',cls:'t-body',rows:5,sub:true},
+    {k:'actividades',t:'text',label:'Cómo se trabaja hoy',ph:'Las principales actividades laborales de la ciudad, con datos y fuentes.',cls:'t-body',rows:5,sub:true,cap:true},
     {k:'tendencias',t:'text',label:'Lo que viene',ph:'Al menos dos tendencias globales o nacionales y cómo tocan a Tocopilla.',cls:'t-body',rows:5,sub:true},
     {k:'mecanismos',t:'text',label:'Qué protege a los trabajadores',ph:'Cómo han evolucionado al menos dos mecanismos institucionales de protección laboral.',cls:'t-body',rows:5,sub:true},
-    {k:'entrevistado',t:'line',label:'Persona entrevistada',ph:'Nombre y a qué se dedica o qué organización representa',cls:'t-name'},
+    {k:'entrevistado',t:'line',label:'Persona entrevistada',ph:'Nombre y a qué se dedica o qué organización representa',cls:'t-name',pre:'Entrevistado: '},
     {k:'entrevista',t:'text',label:'Entrevista',ph:'Preguntas y respuestas de la entrevista.',cls:'t-body',rows:6,sub:true}
   ], guide:[
     'Describan las principales actividades laborales de la ciudad, con datos y fuentes.',
@@ -292,11 +282,11 @@ const PAGES = [
     'Expliquen cómo evolucionaron al menos dos mecanismos de protección laboral, por ejemplo el Código del Trabajo, la Ley 21.561 de 40 horas o la Ley Karin.',
     'Incluyan la entrevista a un trabajador, dirigente sindical u organización social.'
   ]},
-  {n:10, id:'p10', sec:'Filosofía y créditos', kick:'Filosofía · Debate ético y créditos', c:'p', tk:'titular', fields:[
+  {n:10, id:'p10', sec:'Filosofía y créditos', kick:'Filosofía · Debate ético y créditos', tk:'titular', fields:[
     {k:'titular',t:'line',label:'Título de la sección',ph:'Debate ético',cls:'t-title'},
     {k:'dilema',t:'line',label:'La pregunta filosófica',ph:'Un dilema ético o político de Tocopilla en forma de pregunta',cls:'t-quest'},
     {k:'persp',t:'text',label:'Dos miradas filosóficas',ph:'Confronten al menos dos perspectivas, con sus autores.',cls:'t-body',rows:6,sub:true},
-    {k:'col1',t:'column',n:1}, {k:'col2',t:'column',n:2}, {k:'col3',t:'column',n:3}, {k:'col4',t:'column',n:4},
+    {k:'col1',t:'column',n:1},{k:'col2',t:'column',n:2},{k:'col3',t:'column',n:3},{k:'col4',t:'column',n:4},
     {k:'fuentes',t:'text',label:'Fuentes consultadas',ph:'Una fuente por línea.',cls:'t-cap',rows:4,sub:true},
     {k:'creditos',t:'text',label:'Créditos',ph:'Quién hizo qué: dirección, investigación, análisis de riesgos, diseño y fotografías.',cls:'t-cap',rows:4,sub:true}
   ], guide:[
@@ -319,17 +309,15 @@ function h(tag, props, ...kids){
   for (const c of kids.flat()) if (c != null) e.append(c.nodeType ? c : document.createTextNode(c));
   return e;
 }
+function lsGet(k, d){ try { return localStorage.getItem(k) || d; } catch (_) { return d; } }
+function lsSet(k, v){ try { localStorage.setItem(k, v); } catch (_) {} }
 
-const S = {};            // key -> valor guardado o escrito
-const C = {};            // key -> controles de la página
+const S = {}, C = {}, IMGT = {}, Q = {};
 let CLAVE = '', canWrite = false, mode = 'read';
-const IMGT = {};
-const WORD_FIELDS = [];
 
 /* ---------- estado y guardado ---------- */
 function setStatus(s, txt){ const el = $('#status'); el.dataset.s = s; $('#statusTxt').textContent = txt; }
 function toast(msg){ const t = $('#toast'); t.textContent = msg; t.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(()=>{ t.hidden = true; }, 3800); }
-const Q = {};
 function queueSave(key, val){
   S[key] = val;
   if (!canWrite) { setStatus('error', 'Sin clave, esto no se guarda'); return; }
@@ -364,12 +352,14 @@ function fit(el){ if (!el || el.tagName !== 'TEXTAREA') return; el.style.height 
 function refitAll(){ for (const k in C) fit(C[k].ta); }
 function wordsOf(s){ const m = (s||'').trim().match(/\S+/g); return m ? m.length : 0; }
 
-function buildText(pid, f, key, extra){
-  const ta = h('textarea', { rows: f.rows || 1, placeholder: f.ph || '', 'aria-label': f.label || f.k, id: 'f_' + key, lang: 'es', spellcheck: 'true' });
+function buildText(pid, f, key){
+  const cls = f.cls || 't-body';
+  const ta = h('textarea', { rows: f.rows || 1, placeholder: f.ph || '', 'aria-label': f.label || f.k, id: 'f_' + key, lang: 'es', spellcheck: 'true', class: cls });
+  const cols = cls === 't-body' && (f.rows || 1) >= 5;
+  const pr = h('div', { class: 'print ' + cls + (cols ? ' cols' : '') + (f.cap ? ' cap' : ''), 'data-pre': f.pre || '' });
   const wrap = h('div', { class: 'fld empty' + (f.sub ? ' sub' : '') });
   if (f.label) wrap.append(h('label', { for: 'f_' + key }, f.label));
-  ta.classList.add(f.cls || 't-body');
-  wrap.append(ta);
+  wrap.append(ta, pr);
   let wc = null;
   if (f.words) { wc = h('div', { class: 'wc', 'data-s': 'zero' }); wrap.append(wc); }
   ta.addEventListener('keydown', e => { if (f.t === 'line' && e.key === 'Enter') e.preventDefault(); });
@@ -377,7 +367,7 @@ function buildText(pid, f, key, extra){
     if (f.t === 'line') ta.value = ta.value.replace(/\n/g, ' ');
     queueSave(key, ta.value); fit(ta); paint(key); refreshMeta();
   });
-  C[key] = { f, pid, ta, wrap, wc };
+  C[key] = { f, pid, ta, pr, wrap, wc };
   return wrap;
 }
 function buildSelect(pid, f, key){
@@ -390,10 +380,10 @@ function buildSelect(pid, f, key){
 function buildImg(pid, f, key){
   const img = h('img', { alt: f.label, hidden: true });
   const file = h('input', { type: 'file', accept: 'image/*', hidden: true, id: 'file_' + key });
-  const pick = h('button', { type: 'button' }, 'Subir foto');
-  const rm = h('button', { type: 'button', class: 'rm', hidden: true }, 'Quitar foto');
+  const pick = h('button', { type: 'button' }, 'subir foto');
+  const rm = h('button', { type: 'button', class: 'rm', hidden: true }, 'quitar foto');
   const ph = h('div', { class: 'ph' }, h('b', null, f.label), h('span', null, f.ph || ''), pick);
-  const box = h('div', { class: 'img noimg' + (f.tall ? ' tall' : '') }, img, ph, rm, file);
+  const box = h('div', { class: 'img noimg' + (f.tall ? ' tall' : '') }, h('div', { class: 'in' }, img, ph), rm, file);
   const wrap = h('div', { class: 'fld empty' }, box);
   pick.addEventListener('click', () => file.click());
   rm.addEventListener('click', () => { queueSave(key, ''); paint(key); refreshMeta(); });
@@ -422,42 +412,44 @@ async function toDataUrl(file, max){
 }
 function buildColumn(pid, f){
   const ka = pid + '__' + f.k + '_autor', kt = pid + '__' + f.k + '_texto';
-  const a = buildText(pid, { k: f.k + '_autor', t: 'line', label: 'Autor o autora de la columna ' + f.n, ph: 'Nombre del integrante', cls: 't-name' }, ka);
+  const a = buildText(pid, { k: f.k + '_autor', t: 'line', label: 'Columna de opinión ' + f.n, ph: 'Nombre del integrante', cls: 't-name', pre: 'Por ', sub: true }, ka);
   const t = buildText(pid, { k: f.k + '_texto', t: 'text', label: 'Texto de la columna', ph: 'Tesis, dos argumentos, una objeción con su respuesta y una conclusión.', cls: 't-body', rows: 8, words: [300, 400] }, kt);
   const box = h('div', { class: 'col4 empty' }, a, t);
   C[ka].group = box; C[kt].group = box;
-  C[ka].wrap.classList.add('sub'); C[ka].wrap.querySelector('label').textContent = 'Columna de opinión ' + f.n;
   return box;
 }
 
 function buildSheet(p){
-  const sheet = h('section', { class: 'sheet' + (p.cover ? ' cover' : ''), id: 'pag' + p.n, 'data-c': p.c, 'aria-label': 'Página ' + p.n + ', ' + p.sec });
+  const sheet = h('section', { class: 'sheet' + (p.cover ? ' cover' : ''), id: 'pag' + p.n, 'aria-label': 'Página ' + p.n + ', ' + p.sec });
   const body = h('div', { class: 'body' });
+  let dateMid = null;
   if (p.cover) {
-    sheet.append(h('div', { class: 'rh' }, h('span', null, 'Liceo Politécnico Diego Portales'), h('span', null, 'Cuartos medios')));
-    sheet.append(h('h1', { class: 'logo' }, 'Voces', h('br'), 'de Tocopilla', h('em', null, 'Revista virtual')));
+    dateMid = h('div');
+    sheet.append(h('div', { class: 'dateline' }, h('span', null, 'Año I'), dateMid, h('span', null, 'Precio: una buena idea')));
+    sheet.append(h('h1', { class: 'logo' }, 'Voces de Tocopilla'));
+    sheet.append(h('div', { class: 'tag' }, 'Órgano de los estudiantes de cuarto medio del Liceo Politécnico Diego Portales'));
   } else {
-    sheet.append(h('div', { class: 'rh' }, h('span', null, 'Voces de Tocopilla'), h('span', null, p.sec)));
+    sheet.append(h('div', { class: 'rh' }, h('span', { class: 'brand' }, 'Voces de Tocopilla'), h('span', { class: 'sec' }, p.sec), h('span', { class: 'pg' }, 'pág. ' + p.n)));
   }
+  if (p.cover) body.append(h('div', { class: 'stamp' }, 'Primera edición'));
   if (p.kick) body.append(h('div', { class: 'kick' }, p.kick));
   if (p.index) {
-    body.append(h('h2', { class: 't-title' }, 'Índice'));
+    body.append(h('h2', { class: 't-title' }, 'En este número'));
     body.append(h('ol', { class: 'toc', id: 'toc' }));
   }
   for (const f of p.fields) {
-    if (f.t === 'group') {
-      const g = h('div', { class: 'trio' });
-      for (const s of f.fields) g.append(buildText(p.id, s, p.id + '__' + s.k));
-      body.append(g);
-    } else if (f.t === 'column') body.append(buildColumn(p.id, f));
-    else if (f.t === 'select') body.append(buildSelect(p.id, f, p.id + '__' + f.k));
-    else if (f.t === 'img') body.append(buildImg(p.id, f, p.id + '__' + f.k));
-    else body.append(buildText(p.id, f, p.id + '__' + f.k));
+    let el;
+    if (f.t === 'group') { el = h('div', { class: 'trio' }); for (const s of f.fields) el.append(buildText(p.id, s, p.id + '__' + s.k)); }
+    else if (f.t === 'column') el = buildColumn(p.id, f);
+    else if (f.t === 'select') el = buildSelect(p.id, f, p.id + '__' + f.k);
+    else if (f.t === 'img') el = buildImg(p.id, f, p.id + '__' + f.k);
+    else el = buildText(p.id, f, p.id + '__' + f.k);
+    if (dateMid && f.k === 'numero') dateMid.append(el); else body.append(el);
   }
+  if (p.cover) body.append(h('div', { class: 'adentro' }, h('h3', null, 'Adentro'), h('ul', { id: 'adentro' })));
   if (p.guide) body.append(h('details', { class: 'guide' }, h('summary', null, 'Qué pide el profe en esta página'), h('ul', null, p.guide.map(g => h('li', null, g)))));
   sheet.append(body);
-  if (!p.cover) sheet.append(h('div', { class: 'folio' }, String(p.n)));
-  else sheet.append(h('div', { class: 'waves' }));
+  if (!p.cover) sheet.append(h('div', { class: 'folio' }, '— ' + p.n + ' —'));
   return sheet;
 }
 
@@ -468,6 +460,7 @@ function paint(key){
   const has = v.trim().length > 0;
   if (c.ta) {
     if (c.ta.value !== v) c.ta.value = v;
+    c.pr.textContent = v;
     fit(c.ta);
     c.wrap.classList.toggle('empty', !has);
     if (c.wc) {
@@ -479,7 +472,10 @@ function paint(key){
       else t = 'Van ' + n + ' palabras, vas dentro del rango';
       c.wc.dataset.s = s; c.wc.textContent = t;
     }
-    if (c.group) c.group.classList.toggle('empty', !(S[c.pid + '__' + c.f.k.replace(/_(autor|texto)$/, '') + '_autor'] || '').trim() && !(S[c.pid + '__' + c.f.k.replace(/_(autor|texto)$/, '') + '_texto'] || '').trim());
+    if (c.group) {
+      const base = c.pid + '__' + c.f.k.replace(/_(autor|texto)$/, '');
+      c.group.classList.toggle('empty', !(S[base + '_autor'] || '').trim() && !(S[base + '_texto'] || '').trim());
+    }
   } else if (c.sel) {
     if (c.sel.value !== v) c.sel.value = v;
     c.wrap.classList.toggle('empty', !has);
@@ -502,21 +498,22 @@ function pageHas(p){
 function refreshMeta(){
   let done = 0;
   for (const p of PAGES) {
-    if (p.index || p.cover && false) continue;
+    if (p.index) continue;
     const has = pageHas(p);
     if (has) done++;
     const chip = $('#chip' + p.n); if (chip) chip.classList.toggle('has', has);
   }
-  const chip2 = $('#chip2'); if (chip2) chip2.classList.remove('has');
-  $('#prog').innerHTML = '';
-  $('#prog').append(h('strong', null, done + ' de 9'), ' páginas con texto');
-  const toc = $('#toc'); if (!toc) return;
-  toc.replaceChildren();
+  $('#prog').textContent = done + ' de 9 páginas con texto';
+  const toc = $('#toc'), ad = $('#adentro');
+  if (toc) toc.replaceChildren();
+  if (ad) ad.replaceChildren();
   for (const p of PAGES.filter(x => x.n >= 3)) {
     const title = (S[p.id + '__' + p.tk] || '').trim();
-    toc.append(h('li', { 'data-c': p.c }, h('button', { type: 'button', onclick: () => goTo(p.n) },
-      h('span', { class: 'n' }, String(p.n)), h('span', { class: 's' }, p.sec), h('span', { class: 'tt' + (title ? '' : ' pend') }, title || 'Por escribir'))));
+    if (toc) toc.append(h('li', null, h('button', { type: 'button', onclick: () => goTo(p.n) },
+      h('span', { class: 'tt' + (title ? '' : ' pend') }, title || 'Por escribir'), h('span', { class: 's' }, p.sec), h('span', { class: 'n' }, String(p.n)))));
+    if (ad && title) ad.append(h('li', null, h('b', null, 'pág. ' + p.n), h('span', null, title)));
   }
+  if (ad && !ad.children.length) ad.append(h('li', null, h('span', { style: 'font-style:italic;color:var(--muted)' }, 'Los titulares aparecen acá a medida que se escriben.')));
 }
 function goTo(n){ const el = $('#pag' + n); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
 
@@ -534,6 +531,22 @@ function applyMode(m){
   }
   requestAnimationFrame(refitAll);
 }
+
+/* ---------- tamaño de letra y papel ---------- */
+const PALS = [['diario', 'Papel de diario'], ['blanco', 'Blanco imprenta'], ['noche', 'Papel de noche']];
+let pal = lsGet('pal', 'diario'), kk = parseFloat(lsGet('k', '1'));
+if (!PALS.some(x => x[0] === pal)) pal = 'diario';
+if (!(kk >= 0.85 && kk <= 1.35)) kk = 1;
+function applyLook(){
+  document.documentElement.dataset.pal = pal;
+  document.documentElement.style.setProperty('--k', String(kk));
+  $('#palBtn').textContent = PALS.find(x => x[0] === pal)[1];
+  $('#aMenos').disabled = kk <= 0.851; $('#aMas').disabled = kk >= 1.349;
+  requestAnimationFrame(() => { refitAll(); requestAnimationFrame(refitAll); });
+}
+$('#aMenos').addEventListener('click', () => { kk = Math.max(0.85, Math.round((kk - 0.1) * 100) / 100); lsSet('k', kk); applyLook(); });
+$('#aMas').addEventListener('click', () => { kk = Math.min(1.35, Math.round((kk + 0.1) * 100) / 100); lsSet('k', kk); applyLook(); });
+$('#palBtn').addEventListener('click', () => { const i = PALS.findIndex(x => x[0] === pal); pal = PALS[(i + 1) % PALS.length][0]; lsSet('pal', pal); applyLook(); });
 
 /* ---------- descarga de texto ---------- */
 function buildTxt(){
@@ -556,15 +569,16 @@ for (const p of PAGES) {
   pagesEl.append(buildSheet(p));
   chipsEl.append(h('button', { type: 'button', class: 'chip', id: 'chip' + p.n, 'aria-label': 'Ir a la página ' + p.n, onclick: () => goTo(p.n) }, String(p.n)));
 }
+function showClave(on){ $('#claveForm').hidden = !on; if (on) $('#clave').focus(); }
 $('#mEdit').addEventListener('click', () => { if (!canWrite) { showClave(true); showNote('Para escribir pon la clave del equipo arriba.'); return; } applyMode('edit'); });
 $('#mRead').addEventListener('click', () => applyMode('read'));
+applyLook();
 applyMode('read');
 refreshMeta();
 setStatus('saving', 'Conectando');
 let rz; addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(refitAll, 150); });
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(refitAll);
 
-function showClave(on){ $('#claveForm').hidden = !on; if (on) $('#clave').focus(); }
 async function checkClave(c){
   try { const r = await fetch('/api/campos', { method: 'POST', headers: { 'content-type': 'application/json', 'x-clave': c }, body: JSON.stringify({ check: true }) }); return r.ok; }
   catch (e) { return false; }
@@ -602,15 +616,15 @@ $('#claveForm').addEventListener('submit', async e => {
   e.preventDefault();
   const c = $('#clave').value.trim(); if (!c) return;
   if (await checkClave(c)) {
-    CLAVE = c; canWrite = true; try { localStorage.setItem('clave', c); } catch (_) {}
+    CLAVE = c; canWrite = true; lsSet('clave', c);
     showClave(false); showNote(''); applyMode('edit'); setStatus('ok', 'Todo guardado'); toast('Listo, ya puedes escribir.');
   } else { toast('Esa clave no es. Revísala con Sebastian.'); }
 });
 (async function start(){
   await pull();
-  let saved = ''; try { saved = localStorage.getItem('clave') || ''; } catch (_) {}
+  const saved = lsGet('clave', '');
   if (saved && await checkClave(saved)) { CLAVE = saved; canWrite = true; applyMode('edit'); setStatus('ok', 'Todo guardado'); }
-  else { showClave(true); showNote('Estás en modo lectura. Pon la clave del equipo para poder escribir.'); }
+  else { showClave(true); showNote('Estás en modo lectura. Pon la clave del equipo pa poder escribir.'); }
   setInterval(() => { if (!document.hidden) pull(); }, 4000);
   document.addEventListener('visibilitychange', () => { if (!document.hidden) pull(); });
 })();
