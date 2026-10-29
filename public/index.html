@@ -155,10 +155,41 @@ select option{color:#1C1A16;background:#fff}
 
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(1.2rem + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--paper);padding:.6rem 1rem;font-family:var(--f-type);font-size:.85rem;z-index:20;max-width:calc(100% - 2rem)}
 
+.chip.on{background:var(--bar-ink);color:var(--bar)}
+.pager{position:fixed;left:0;right:0;bottom:0;z-index:7;display:flex;justify-content:center;align-items:center;gap:.8rem;padding:.4rem .8rem calc(.4rem + env(safe-area-inset-bottom,0px));background:var(--bar);color:var(--bar-ink);font-family:var(--f-type);font-size:.85rem;border-top:3px double var(--bar-ink)}
+.pager .btn{min-width:2.8rem;font-size:1.1rem;padding:.15rem .6rem}
+body.paged{padding-bottom:4.6rem}
+body.paged .toast{bottom:calc(4.4rem + env(safe-area-inset-bottom,0px))}
+@media (min-width:1100px){ body.paged .wrap{max-width:1180px} }
+.pages.two{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0}
+.pages.solo .sheet{max-width:590px;margin:0 auto}
+.sheet.l{background-image:var(--noise),linear-gradient(to left,rgba(0,0,0,.18),rgba(0,0,0,0) 8%);box-shadow:-3px 3px 0 rgba(0,0,0,.25),0 0 0 1px var(--faint)}
+.sheet.r{background-image:var(--noise),linear-gradient(to right,rgba(0,0,0,.18),rgba(0,0,0,0) 8%)}
+@keyframes turn{from{opacity:0;transform:translateX(var(--dx,20px))}to{opacity:1;transform:none}}
+.pages.turn{animation:turn .28s ease-out}
+.pages{perspective:1800px}
+@keyframes flipF{0%{transform:rotateY(-100deg);filter:brightness(.6)}60%{filter:brightness(.88)}100%{transform:none;filter:none}}
+@keyframes flipB{0%{transform:rotateY(100deg);filter:brightness(.6)}60%{filter:brightness(.88)}100%{transform:none;filter:none}}
+@keyframes sombra{0%{opacity:.55}100%{opacity:0}}
+.sheet.fF{transform-origin:left center;animation:flipF .75s cubic-bezier(.3,.6,.25,1) both;position:relative;z-index:2}
+.sheet.fB{transform-origin:right center;animation:flipB .75s cubic-bezier(.3,.6,.25,1) both;position:relative;z-index:2}
+.pages.solo .sheet.fF{transform-origin:left center}
+.sheet.fF::after,.sheet.fB::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(0,0,0,.35),rgba(0,0,0,0) 45%);animation:sombra .75s ease-out both}
+.sheet.fB::after{background:linear-gradient(270deg,rgba(0,0,0,.35),rgba(0,0,0,0) 45%)}
+@media (prefers-reduced-motion:reduce){.sheet.fF,.sheet.fB{animation:none}}
+.sheet:nth-child(odd) .img{transform:rotate(-.35deg)}
+.sheet:nth-child(even) .img{transform:rotate(.3deg)}
+.t-pull{font-style:italic;font-size:1.45rem;line-height:1.25;text-align:center;border-top:3px double var(--ink);border-bottom:3px double var(--ink);padding:.6rem .4rem}
+.print[data-post]:not([data-post=""])::after{content:attr(data-post)}
+.exitPres{position:fixed;top:calc(.6rem + env(safe-area-inset-top,0px));right:.7rem;z-index:12;background:var(--ink);color:var(--paper);border:0;padding:.3rem .8rem;font-family:var(--f-type);font-size:.8rem}
+body.pres .bar,body.pres .note,body.pres .guide{display:none}
+body.pres.paged{padding-top:.8rem}
 @media (max-width:560px){
   .sheet{padding:1.1rem 1.1rem 3.2rem}
   .rh{grid-template-columns:auto 1fr auto}
   .dateline{grid-template-columns:1fr;text-align:center}
+  .bar{position:static}
+  body.paged .chips{display:none}
   .stamp{top:-2.5rem;font-size:.78rem}
 }
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
@@ -176,6 +207,8 @@ select option{color:#1C1A16;background:#fff}
         <button type="button" class="btn" id="aMenos" aria-label="Letra más chica">A−</button>
         <button type="button" class="btn" id="aMas" aria-label="Letra más grande">A+</button>
         <button type="button" class="btn" id="palBtn" aria-label="Cambiar el papel">Papel de diario</button>
+        <button type="button" class="btn" id="vBtn">Hojear</button>
+        <button type="button" class="btn" id="presBtn">Presentar</button>
         <button type="button" class="btn" id="dl">Bajar texto</button>
       </div>
     </div>
@@ -187,6 +220,8 @@ select option{color:#1C1A16;background:#fff}
   <main class="pages" id="pages"></main>
 </div>
 <div class="toast" id="toast" hidden></div>
+<nav class="pager" id="pager" hidden aria-label="Pasar de página"><button type="button" class="btn" id="pPrev" aria-label="Página anterior">‹</button><span id="pInfo">pág. 1 de 10</span><button type="button" class="btn" id="pNext" aria-label="Página siguiente">›</button></nav>
+<button type="button" class="exitPres" id="exitPres" hidden>Salir de la presentación</button>
 
 <script>
 const PAGES = [
@@ -206,6 +241,7 @@ const PAGES = [
   {n:3, id:'p3', sec:'Editorial', kick:'Lengua y Literatura · Editorial', tk:'titular', fields:[
     {k:'titular',t:'line',label:'Título de la editorial',ph:'Un título con postura',cls:'t-title'},
     {k:'texto',t:'text',label:'Editorial',ph:'Escriban la postura del equipo sobre cómo vivir y trabajar de forma digna y segura en Tocopilla.',cls:'t-body',rows:14,words:[300,400],cap:true},
+    {k:'cita',t:'line',label:'Frase destacada',ph:'Una frase fuerte del texto, pa destacarla en grande',cls:'t-pull',pre:'“',post:'”'},
     {k:'firma',t:'line',label:'Firma',ph:'Equipo editorial, 4° Medio',cls:'t-name',pre:'— '}
   ], guide:[
     'Entre 300 y 400 palabras con la postura del equipo sobre cómo vivir y trabajar de forma digna y segura en Tocopilla.',
@@ -216,6 +252,7 @@ const PAGES = [
     {k:'titular',t:'line',label:'Título',ph:'Qué hay en el suelo que pisamos',cls:'t-title'},
     {k:'bajada',t:'line',label:'Bajada',ph:'Una o dos líneas que resuman la investigación',cls:'t-sub'},
     {k:'texto',t:'text',label:'Metales en muestras de suelo',ph:'Qué metales aparecen, de dónde pueden venir y qué efectos tienen en la salud.',cls:'t-body',rows:9,sub:true,cap:true},
+    {k:'cita',t:'line',label:'Frase destacada',ph:'Una frase fuerte del texto, pa destacarla en grande',cls:'t-pull',pre:'“',post:'”'},
     {k:'img',t:'img',label:'Foto',ph:'Foto propia del lugar o de la muestra'},
     {k:'pie',t:'line',label:'Pie de foto',ph:'Qué se ve, dónde y quién la sacó',cls:'t-cap',pre:'Foto: '}
   ], guide:[
@@ -228,6 +265,7 @@ const PAGES = [
     {k:'bajada',t:'line',label:'Bajada',ph:'Una o dos líneas que resuman',cls:'t-sub'},
     {k:'texto',t:'text',label:'Aluviones y movimiento de material',ph:'Cómo funciona un aluvión en las quebradas de Tocopilla y qué arrastra.',cls:'t-body',rows:8,sub:true,cap:true},
     {k:'suelo',t:'text',label:'Desplazamiento de suelo y metales',ph:'Cómo un aluvión remueve y dispersa los metales pesados.',cls:'t-body',rows:7,sub:true},
+    {k:'cita',t:'line',label:'Frase destacada',ph:'Una frase fuerte del texto, pa destacarla en grande',cls:'t-pull',pre:'“',post:'”'},
     {k:'img',t:'img',label:'Foto',ph:'Foto propia de una quebrada'},
     {k:'pie',t:'line',label:'Pie de foto',ph:'Qué se ve, dónde y quién la sacó',cls:'t-cap',pre:'Foto: '}
   ], guide:[
@@ -273,6 +311,7 @@ const PAGES = [
     {k:'titular',t:'line',label:'Título',ph:'Trabajar con dignidad en Tocopilla',cls:'t-title'},
     {k:'actividades',t:'text',label:'Cómo se trabaja hoy',ph:'Las principales actividades laborales de la ciudad, con datos y fuentes.',cls:'t-body',rows:5,sub:true,cap:true},
     {k:'tendencias',t:'text',label:'Lo que viene',ph:'Al menos dos tendencias globales o nacionales y cómo tocan a Tocopilla.',cls:'t-body',rows:5,sub:true},
+    {k:'cita',t:'line',label:'Frase destacada',ph:'Una frase fuerte del texto, pa destacarla en grande',cls:'t-pull',pre:'“',post:'”'},
     {k:'mecanismos',t:'text',label:'Qué protege a los trabajadores',ph:'Cómo han evolucionado al menos dos mecanismos institucionales de protección laboral.',cls:'t-body',rows:5,sub:true},
     {k:'entrevistado',t:'line',label:'Persona entrevistada',ph:'Nombre y a qué se dedica o qué organización representa',cls:'t-name',pre:'Entrevistado: '},
     {k:'entrevista',t:'text',label:'Entrevista',ph:'Preguntas y respuestas de la entrevista.',cls:'t-body',rows:6,sub:true}
@@ -314,6 +353,7 @@ function lsSet(k, v){ try { localStorage.setItem(k, v); } catch (_) {} }
 
 const S = {}, C = {}, IMGT = {}, Q = {};
 let CLAVE = '', canWrite = false, mode = 'read';
+let paged = lsGet('paged', '1') === '1', curPage = 1, pres = false, prevState = null, dir = 1;
 
 /* ---------- estado y guardado ---------- */
 function setStatus(s, txt){ const el = $('#status'); el.dataset.s = s; $('#statusTxt').textContent = txt; }
@@ -356,7 +396,7 @@ function buildText(pid, f, key){
   const cls = f.cls || 't-body';
   const ta = h('textarea', { rows: f.rows || 1, placeholder: f.ph || '', 'aria-label': f.label || f.k, id: 'f_' + key, lang: 'es', spellcheck: 'true', class: cls });
   const cols = cls === 't-body' && (f.rows || 1) >= 5;
-  const pr = h('div', { class: 'print ' + cls + (cols ? ' cols' : '') + (f.cap ? ' cap' : ''), 'data-pre': f.pre || '' });
+  const pr = h('div', { class: 'print ' + cls + (cols ? ' cols' : '') + (f.cap ? ' cap' : ''), 'data-pre': f.pre || '', 'data-post': f.post || '' });
   const wrap = h('div', { class: 'fld empty' + (f.sub ? ' sub' : '') });
   if (f.label) wrap.append(h('label', { for: 'f_' + key }, f.label));
   wrap.append(ta, pr);
@@ -449,7 +489,7 @@ function buildSheet(p){
   if (p.cover) body.append(h('div', { class: 'adentro' }, h('h3', null, 'Adentro'), h('ul', { id: 'adentro' })));
   if (p.guide) body.append(h('details', { class: 'guide' }, h('summary', null, 'Qué pide el profe en esta página'), h('ul', null, p.guide.map(g => h('li', null, g)))));
   sheet.append(body);
-  if (!p.cover) sheet.append(h('div', { class: 'folio' }, '— ' + p.n + ' —'));
+  if (!p.cover) sheet.append(h('div', { class: 'folio' }, '— ' + p.n + ' —  ·  impreso en Tocopilla'));
   return sheet;
 }
 
@@ -515,7 +555,10 @@ function refreshMeta(){
   }
   if (ad && !ad.children.length) ad.append(h('li', null, h('span', { style: 'font-style:italic;color:var(--muted)' }, 'Los titulares aparecen acá a medida que se escriben.')));
 }
-function goTo(n){ const el = $('#pag' + n); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+function goTo(n){
+  if (paged) { dir = n >= curPage ? 1 : -1; showView(viewOf(n), true); return; }
+  const el = $('#pag' + n); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
 
 function showNote(t){ const n = $('#note'); n.textContent = t; n.hidden = !t; }
 function applyMode(m){
@@ -567,16 +610,88 @@ function buildTxt(){
 const pagesEl = $('#pages'), chipsEl = $('#chips');
 for (const p of PAGES) {
   pagesEl.append(buildSheet(p));
-  chipsEl.append(h('button', { type: 'button', class: 'chip', id: 'chip' + p.n, 'aria-label': 'Ir a la página ' + p.n, onclick: () => goTo(p.n) }, String(p.n)));
+  chipsEl.append(h('button', { type: 'button', class: 'chip', id: 'chip' + p.n, 'data-n': p.n, 'aria-label': 'Ir a la página ' + p.n, onclick: () => goTo(p.n) }, String(p.n)));
 }
-function showClave(on){ $('#claveForm').hidden = !on; if (on) $('#clave').focus(); }
-$('#mEdit').addEventListener('click', () => { if (!canWrite) { showClave(true); showNote('Para escribir pon la clave del equipo arriba.'); return; } applyMode('edit'); });
+function showClave(on, foc){ $('#claveForm').hidden = !on; if (on && foc) $('#clave').focus(); }
+$('#mEdit').addEventListener('click', () => { if (!canWrite) { showClave(true, true); showNote('Para escribir pon la clave del equipo arriba.'); return; } applyMode('edit'); });
 $('#mRead').addEventListener('click', () => applyMode('read'));
 applyLook();
 applyMode('read');
 refreshMeta();
 setStatus('saving', 'Conectando');
-let rz; addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(refitAll, 150); });
+
+/* ---------- hojear y presentar ---------- */
+function isWide(){ return innerWidth >= 1100; }
+function viewsList(){ return isWide() ? [[1],[2,3],[4,5],[6,7],[8,9],[10]] : PAGES.map(p => [p.n]); }
+function viewOf(n){ const i = viewsList().findIndex(v => v.includes(n)); return i < 0 ? 0 : i; }
+function showView(i, animate){
+  const V = viewsList(); i = Math.max(0, Math.min(V.length - 1, i)); const show = V[i]; curPage = show[0];
+  for (const p of PAGES) {
+    const el = $('#pag' + p.n), on = show.includes(p.n);
+    el.hidden = !on; el.classList.toggle('l', show.length === 2 && p.n === show[0]); el.classList.toggle('r', show.length === 2 && p.n === show[1]);
+  }
+  const box = $('#pages'); box.classList.toggle('two', show.length === 2); box.classList.toggle('solo', show.length === 1);
+  $('#pInfo').textContent = 'pág. ' + (show.length === 2 ? show[0] + ' y ' + show[1] : show[0]) + ' de 10';
+  $('#pPrev').disabled = i === 0; $('#pNext').disabled = i === V.length - 1;
+  document.querySelectorAll('.chip').forEach(c => c.classList.toggle('on', show.includes(+c.dataset.n)));
+  if (animate) {
+    box.classList.remove('turn'); document.querySelectorAll('.sheet').forEach(x => x.classList.remove('fF', 'fB')); void box.offsetWidth;
+    const tgt = show.length === 2 ? $('#pag' + (dir > 0 ? show[1] : show[0])) : $('#pag' + show[0]);
+    tgt.classList.add(dir > 0 ? 'fF' : 'fB'); window.scrollTo(0, 0);
+    setTimeout(() => tgt.classList.remove('fF', 'fB'), 800);
+  }
+  requestAnimationFrame(() => { refitAll(); requestAnimationFrame(refitAll); });
+}
+function step(d){ dir = d; showView(viewOf(curPage) + d, true); }
+function setPaged(on){
+  paged = on; lsSet('paged', on ? '1' : '0');
+  document.body.classList.toggle('paged', on);
+  $('#pager').hidden = !on;
+  $('#vBtn').textContent = on ? 'Ver seguido' : 'Hojear';
+  if (on) showView(viewOf(curPage), false);
+  else {
+    for (const p of PAGES) { const el = $('#pag' + p.n); el.hidden = false; el.classList.remove('l', 'r'); }
+    $('#pages').classList.remove('two', 'solo');
+    document.querySelectorAll('.chip').forEach(c => c.classList.remove('on'));
+    requestAnimationFrame(refitAll);
+  }
+}
+function presOn(){
+  if (pres) return;
+  pres = true; prevState = { paged, mode };
+  document.body.classList.add('pres'); applyMode('read'); setPaged(true); showView(0, false);
+  $('#exitPres').hidden = false;
+  try { const r = document.documentElement.requestFullscreen && document.documentElement.requestFullscreen(); if (r && r.catch) r.catch(() => {}); } catch (_) {}
+}
+function presOff(){
+  if (!pres) return;
+  pres = false; document.body.classList.remove('pres'); $('#exitPres').hidden = true;
+  if (prevState) { setPaged(prevState.paged); applyMode(prevState.mode === 'edit' && canWrite ? 'edit' : 'read'); }
+  try { if (document.fullscreenElement) document.exitFullscreen().catch(() => {}); } catch (_) {}
+}
+$('#vBtn').addEventListener('click', () => setPaged(!paged));
+$('#presBtn').addEventListener('click', presOn);
+$('#exitPres').addEventListener('click', presOff);
+$('#pPrev').addEventListener('click', () => step(-1));
+$('#pNext').addEventListener('click', () => step(1));
+document.addEventListener('fullscreenchange', () => { if (!document.fullscreenElement && pres) presOff(); });
+addEventListener('keydown', e => {
+  const t = e.target;
+  if (t && /^(TEXTAREA|INPUT|SELECT)$/.test(t.tagName)) return;
+  if (e.key === 'Escape' && pres) { presOff(); return; }
+  if (!paged) return;
+  if (e.key === 'ArrowRight' || e.key === 'PageDown') step(1);
+  else if (e.key === 'ArrowLeft' || e.key === 'PageUp') step(-1);
+});
+let tx = 0, ty = 0, tEl = null;
+$('#pages').addEventListener('touchstart', e => { const t = e.touches[0]; tx = t.clientX; ty = t.clientY; tEl = e.target; }, { passive: true });
+$('#pages').addEventListener('touchend', e => {
+  if (!paged) return;
+  const t = e.changedTouches[0], dx = t.clientX - tx, dy = t.clientY - ty;
+  if (Math.abs(dx) > 70 && Math.abs(dy) < 45 && !(tEl && tEl.closest && tEl.closest('textarea,select'))) step(dx < 0 ? 1 : -1);
+});
+setPaged(paged);
+let rz; addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(() => { if (paged) showView(viewOf(curPage), false); else refitAll(); }, 150); });
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(refitAll);
 
 async function checkClave(c){
