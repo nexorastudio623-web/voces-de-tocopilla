@@ -120,6 +120,10 @@ select option{color:#1C1A16;background:#fff}
 .img .ph b{font-family:var(--f-sc);font-weight:400;font-size:1.1rem;color:var(--ink)}
 .img .ph button{border:1px dashed var(--ink);background:transparent;padding:.35rem .8rem;font-family:var(--f-type);font-size:.82rem;color:var(--ink)}
 .img .rm{position:absolute;right:.8rem;bottom:.8rem;background:var(--ink);color:var(--paper);border:0;padding:.2rem .6rem;font-family:var(--f-type);font-size:.75rem}
+.vid{margin:0;border:1px solid var(--ink);padding:.3rem;background:var(--paper)}
+.vid video{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;background:#000;filter:grayscale(1) contrast(1.1) sepia(.2)}
+.vid figcaption{margin-top:.3rem}
+@media (min-width:640px){.vid{max-width:70%;margin-inline:auto}}
 .read .img.noimg{display:none}
 .read .img .rm,.read .img .ph button{display:none}
 
@@ -230,7 +234,7 @@ const PAGES = [
     {k:'titulo',t:'line',label:'Titular de portada',ph:'El titular grande de este número',cls:'t-title'},
     {k:'bajada',t:'line',label:'Bajada de portada',ph:'Una frase corta que invite a leer',cls:'t-sub'},
     {k:'img',t:'img',label:'Foto de portada',ph:'Una foto de Tocopilla o del equipo'},
-    {k:'integrantes',t:'text',label:'Redacción',ph:'Un integrante por línea, con su rol',cls:'t-body',rows:4,sub:true}
+    {k:'integrantes',t:'text',label:'Redactado por',ph:'Un integrante por línea, con su rol',cls:'t-body',rows:4,sub:true}
   ], guide:[
     'Nombre de la revista, título del número e imagen que tenga que ver con la ciudad y con el equipo.',
     'Pongan a los cuatro integrantes con su rol: director o directora editorial, periodista de investigación, analista de riesgos y editor o editora de diseño.'
@@ -248,32 +252,21 @@ const PAGES = [
     'Antes de escribir, definan propósito, audiencia, género, tema y esquema en la ficha de planificación.',
     'Cuiden la coherencia y la cohesión, con conectores variados.'
   ]},
-  {n:4, id:'p4', sec:'Ciencias para la Ciudadanía', kick:'Ciencias para la Ciudadanía · Tocopilla preparada', tk:'titular', fields:[
+  {n:4, id:'p4', sec:'Ciencias para la Ciudadanía', kick:'Reportaje central · Riesgo en el suelo de Tocopilla', tk:'titular', fields:[
     {k:'titular',t:'line',label:'Título',ph:'Qué hay en el suelo que pisamos',cls:'t-title'},
     {k:'bajada',t:'line',label:'Bajada',ph:'Una o dos líneas que resuman la investigación',cls:'t-sub'},
     {k:'texto',t:'text',label:'Metales en muestras de suelo',ph:'Qué metales aparecen, de dónde pueden venir y qué efectos tienen en la salud.',cls:'t-body',rows:9,sub:true,cap:true},
     {k:'cita',t:'line',label:'Frase destacada',ph:'Una frase fuerte del texto, pa destacarla en grande',cls:'t-pull',pre:'“',post:'”'},
-    {k:'img',t:'img',label:'Foto',ph:'Foto propia del lugar o de la muestra'},
-    {k:'pie',t:'line',label:'Pie de foto',ph:'Qué se ve, dónde y quién la sacó',cls:'t-cap',pre:'Foto: '}
+    {k:'img',t:'img',label:'Las cuatro muestras',ph:'Foto de las muestras de suelo en las placas',def:'media/muestras.jpg'},
+    {k:'lupa__img',t:'img',label:'Una muestra con lupa',ph:'Foto de lo que se ve con la lupa',def:'media/lupa.jpg'},
+    {k:'lupa',t:'video',src:'media/lupa.mp4',label:'Video de la muestra vista con lupa'},
+    {k:'pie',t:'line',label:'Pie de foto',ph:'Qué se ve, dónde y quién la sacó',cls:'t-cap',pre:'Fotos: '}
   ], guide:[
     'Investigación sobre la presencia de metales en muestras de suelo.',
     'Expliquen qué muestras se usaron, qué muestran y al menos una limitación con su razón.',
     'El apoyo teórico habla de metales pesados como arsénico, plomo y níquel, que vienen de las termoeléctricas a carbón y del puerto.'
   ]},
-  {n:5, id:'p5', sec:'Ciencias para la Ciudadanía', kick:'Ciencias para la Ciudadanía · Tocopilla preparada', tk:'titular', fields:[
-    {k:'titular',t:'line',label:'Título',ph:'Cuando baja la quebrada',cls:'t-title'},
-    {k:'bajada',t:'line',label:'Bajada',ph:'Una o dos líneas que resuman',cls:'t-sub'},
-    {k:'texto',t:'text',label:'Aluviones y movimiento de material',ph:'Cómo funciona un aluvión en las quebradas de Tocopilla y qué arrastra.',cls:'t-body',rows:8,sub:true,cap:true},
-    {k:'suelo',t:'text',label:'Desplazamiento de suelo y metales',ph:'Cómo un aluvión remueve y dispersa los metales pesados.',cls:'t-body',rows:7,sub:true},
-    {k:'cita',t:'line',label:'Frase destacada',ph:'Una frase fuerte del texto, pa destacarla en grande',cls:'t-pull',pre:'“',post:'”'},
-    {k:'img',t:'img',label:'Foto',ph:'Foto propia de una quebrada'},
-    {k:'pie',t:'line',label:'Pie de foto',ph:'Qué se ve, dónde y quién la sacó',cls:'t-cap',pre:'Foto: '}
-  ], guide:[
-    'Investigación sobre aluviones y movimiento de material, incluido el posible desplazamiento de suelo y metales.',
-    'Las quebradas pueden destruir viviendas y dañar las redes de agua y alcantarillado.',
-    'Expliquen cómo el aluvión remueve y dispersa los metales pesados.'
-  ]},
-  {n:6, id:'p6', sec:'Ciencias para la Ciudadanía', kick:'Ciencias para la Ciudadanía · Tocopilla preparada', tk:'titular', fields:[
+  {n:5, id:'p5', sec:'Ciencias para la Ciudadanía', kick:'Reportaje central · Riesgo, modelo y propuestas', tk:'titular', fields:[
     {k:'titular',t:'line',label:'Título',ph:'Qué tan preparados estamos',cls:'t-title'},
     {k:'trio',t:'group',fields:[
       {k:'amenaza',t:'text',label:'Amenaza',ph:'El fenómeno que puede hacer daño, con un ejemplo de Tocopilla.',cls:'t-body',rows:3,sub:true},
@@ -281,59 +274,69 @@ const PAGES = [
       {k:'capac',t:'text',label:'Capacidad',ph:'Con qué recursos cuenta la comunidad, con un ejemplo.',cls:'t-body',rows:3,sub:true}
     ]},
     {k:'modelo',t:'text',label:'El modelo que analizamos',ph:'Qué modelo elegimos, qué muestra y qué limitaciones tiene, con su razón.',cls:'t-body',rows:6,sub:true},
-    {k:'capacidades',t:'text',label:'Lo que tienen el liceo y la comunidad',ph:'Fortalezas y debilidades del PISE del liceo y de la comunidad para prevenir, mitigar y adaptarse.',cls:'t-body',rows:6,sub:true}
-  ], guide:[
-    'Definan amenaza, vulnerabilidad y capacidad, con un ejemplo de cada una en Tocopilla.',
-    'Analicen un modelo, por ejemplo carta de inundación, mapa de quebradas o maqueta, y expliquen sus limitaciones con razón.',
-    'Evalúen las capacidades del liceo, con el PISE, y de la comunidad para la prevención, la mitigación y la adaptación, apoyándose en evidencias como observación, entrevistas o documentos.'
-  ]},
-  {n:7, id:'p7', sec:'Ciencias para la Ciudadanía', kick:'Ciencias para la Ciudadanía · Tocopilla preparada', tk:'titular', fields:[
-    {k:'titular',t:'line',label:'Título',ph:'Mapa de riesgos y qué podemos hacer',cls:'t-title'},
+    {k:'capacidades',t:'text',label:'Lo que tienen el liceo y la comunidad',ph:'Fortalezas y debilidades del PISE del liceo y de la comunidad para prevenir, mitigar y adaptarse.',cls:'t-body',rows:6,sub:true},
     {k:'img',t:'img',label:'Infografía con el mapa de riesgos',ph:'Suban la infografía terminada',tall:true},
     {k:'intro',t:'text',label:'Entrada del artículo',ph:'Presenten el problema en pocas líneas.',cls:'t-body',rows:3},
     {k:'p1',t:'text',label:'Propuesta 1',ph:'Qué se propone, quién lo haría y cómo ayuda.',cls:'t-body',rows:3,sub:true},
     {k:'p2',t:'text',label:'Propuesta 2',ph:'Qué se propone, quién lo haría y cómo ayuda.',cls:'t-body',rows:3,sub:true},
     {k:'p3',t:'text',label:'Propuesta 3',ph:'Qué se propone, quién lo haría y cómo ayuda.',cls:'t-body',rows:3,sub:true}
   ], guide:[
+    'Definan amenaza, vulnerabilidad y capacidad, con un ejemplo de cada una en Tocopilla.',
+    'Analicen un modelo, por ejemplo carta de inundación, mapa de quebradas o maqueta, y expliquen sus limitaciones con razón.',
+    'Evalúen las capacidades del liceo, con el PISE, y de la comunidad para la prevención, la mitigación y la adaptación, apoyándose en evidencias como observación, entrevistas o documentos.',
     'Infografía clara y ordenada, con el mapa de las zonas afectadas.',
     'Artículo con al menos tres propuestas de prevención, mitigación o adaptación, que se puedan hacer de verdad y que respondan a las debilidades que encontraron.'
   ]},
-  {n:8, id:'p8', sec:'Voces creativas', kick:'Lengua y Literatura · Voces creativas', tk:'titulo', fields:[
-    {k:'genero',t:'select',label:'Género',options:['Crónica','Poema','Microcuento']},
-    {k:'titulo',t:'line',label:'Título',ph:'El título de su texto',cls:'t-title'},
-    {k:'texto',t:'text',label:'Texto',ph:'Un texto inspirado en Tocopilla.',cls:'t-body',rows:16,cap:true},
-    {k:'autor',t:'line',label:'Autor o autora',ph:'Nombre',cls:'t-name',pre:'Por '}
-  ], guide:[
-    'Una crónica, un poema o un microcuento inspirado en Tocopilla.',
-    'Es el espacio para jugar con el lenguaje, pero igual pasa por la revisión entre pares.'
-  ]},
-  {n:9, id:'p9', sec:'Educación Ciudadana', kick:'Educación Ciudadana · Trabajo digno en Tocopilla', tk:'titular', fields:[
+  {n:6, id:'p6', sec:'Educación Ciudadana', kick:'Reportaje central · Trabajo digno en Tocopilla', tk:'titular', fields:[
     {k:'titular',t:'line',label:'Título',ph:'Trabajar con dignidad en Tocopilla',cls:'t-title'},
     {k:'actividades',t:'text',label:'Cómo se trabaja hoy',ph:'Las principales actividades laborales de la ciudad, con datos y fuentes.',cls:'t-body',rows:5,sub:true,cap:true},
     {k:'tendencias',t:'text',label:'Lo que viene',ph:'Al menos dos tendencias globales o nacionales y cómo tocan a Tocopilla.',cls:'t-body',rows:5,sub:true},
     {k:'cita',t:'line',label:'Frase destacada',ph:'Una frase fuerte del texto, pa destacarla en grande',cls:'t-pull',pre:'“',post:'”'},
     {k:'mecanismos',t:'text',label:'Qué protege a los trabajadores',ph:'Cómo han evolucionado al menos dos mecanismos institucionales de protección laboral.',cls:'t-body',rows:5,sub:true},
     {k:'entrevistado',t:'line',label:'Persona entrevistada',ph:'Nombre y a qué se dedica o qué organización representa',cls:'t-name',pre:'Entrevistado: '},
-    {k:'entrevista',t:'text',label:'Entrevista',ph:'Preguntas y respuestas de la entrevista.',cls:'t-body',rows:6,sub:true}
+    {k:'entrevista',t:'text',label:'Entrevista',ph:'Preguntas y respuestas de la entrevista.',cls:'t-body',rows:6,sub:true},
+    {k:'cierre',t:'text',label:'Cierre',ph:'Qué significa trabajo digno en Tocopilla hoy y qué desafíos quedan.',cls:'t-body',rows:4,sub:true}
   ], guide:[
     'Describan las principales actividades laborales de la ciudad, con datos y fuentes.',
     'Conéctenlas con al menos dos tendencias globales o nacionales, como automatización, transición energética, informalidad o empleo por plataformas.',
     'Expliquen cómo evolucionaron al menos dos mecanismos de protección laboral, por ejemplo el Código del Trabajo, la Ley 21.561 de 40 horas o la Ley Karin.',
     'Incluyan la entrevista a un trabajador, dirigente sindical u organización social.'
   ]},
-  {n:10, id:'p10', sec:'Filosofía y créditos', kick:'Filosofía · Debate ético y créditos', tk:'titular', fields:[
+  {n:7, id:'p7', sec:'Filosofía', kick:'Reportaje central · Dilema ético', tk:'titular', fields:[
     {k:'titular',t:'line',label:'Título de la sección',ph:'Debate ético',cls:'t-title'},
     {k:'dilema',t:'line',label:'La pregunta filosófica',ph:'Un dilema ético o político de Tocopilla en forma de pregunta',cls:'t-quest'},
-    {k:'persp',t:'text',label:'Dos miradas filosóficas',ph:'Confronten al menos dos perspectivas, con sus autores.',cls:'t-body',rows:6,sub:true},
-    {k:'col1',t:'column',n:1},{k:'col2',t:'column',n:2},{k:'col3',t:'column',n:3},{k:'col4',t:'column',n:4},
-    {k:'fuentes',t:'text',label:'Fuentes consultadas',ph:'Una fuente por línea.',cls:'t-cap',rows:4,sub:true},
-    {k:'creditos',t:'text',label:'Créditos',ph:'Quién hizo qué: dirección, investigación, análisis de riesgos, diseño y fotografías.',cls:'t-cap',rows:4,sub:true}
+    {k:'persp',t:'text',label:'Dos miradas filosóficas',ph:'Confronten al menos dos perspectivas, con sus autores.',cls:'t-body',rows:8,sub:true,cap:true},
+    {k:'cita',t:'line',label:'Frase destacada',ph:'Una frase fuerte del texto, pa destacarla en grande',cls:'t-pull',pre:'“',post:'”'}
   ], guide:[
     'Formulen un dilema ético o político de Tocopilla como pregunta filosófica.',
-    'Confronten al menos dos perspectivas filosóficas con sus autores.',
+    'Confronten al menos dos perspectivas filosóficas con sus autores.'
+  ]},
+  {n:8, id:'p8', sec:'Opinión de los integrantes', kick:'Columnas de opinión · Primera parte', tk:'titular', fields:[
+    {k:'titular',t:'line',label:'Título de la página',ph:'Lo que opinamos',cls:'t-title'},
+    {k:'col1',t:'column',n:1},{k:'col2',t:'column',n:2}
+  ], guide:[
     'Cada integrante escribe una columna de opinión de 300 a 400 palabras: tesis, dos argumentos, una objeción con su respuesta y una conclusión.',
+    'Una opinión justificada y argumentada: definan, describan, expliquen o ejemplifiquen las ideas y conceptos.'
+  ]},
+  {n:9, id:'p9', sec:'Opinión de los integrantes', kick:'Columnas de opinión · Segunda parte', tk:'titular', fields:[
+    {k:'titular',t:'line',label:'Título de la página',ph:'Lo que opinamos II',cls:'t-title'},
+    {k:'col3',t:'column',n:3},{k:'col4',t:'column',n:4}
+  ], guide:[
+    'Cada integrante escribe una columna de opinión de 300 a 400 palabras: tesis, dos argumentos, una objeción con su respuesta y una conclusión.',
+    'Una opinión justificada y argumentada: definan, describan, expliquen o ejemplifiquen las ideas y conceptos.'
+  ]},
+  {n:10, id:'p10', sec:'Voces creativas y créditos', kick:'Lengua y Literatura · Voces creativas, créditos y fuentes', tk:'titulo', fields:[
+    {k:'genero',t:'select',label:'Género',options:['Crónica','Poema','Microcuento']},
+    {k:'titulo',t:'line',label:'Título',ph:'El título de su texto',cls:'t-title'},
+    {k:'texto',t:'text',label:'Texto',ph:'Un texto inspirado en Tocopilla.',cls:'t-body',rows:16,cap:true},
+    {k:'autor',t:'line',label:'Autor o autora',ph:'Nombre',cls:'t-name',pre:'Por '},
+    {k:'fuentes',t:'text',label:'Fuentes consultadas',ph:'Una fuente por línea.',cls:'t-cap',rows:4,sub:true},
+    {k:'creditos',t:'text',label:'Créditos',ph:'Quién hizo qué: redacción, investigación, análisis de riesgos, diseño y fotografías.',cls:'t-cap',rows:4,sub:true}
+  ], guide:[
+    'Una crónica, un poema o un microcuento inspirado en Tocopilla.',
+    'Es el espacio para jugar con el lenguaje, pero igual pasa por la revisión entre pares.',
     'Cierren con las fuentes consultadas y los créditos.'
-  ]}
+  ]},
 ];
 
 const $ = s => document.querySelector(s);
@@ -483,6 +486,7 @@ function buildSheet(p){
     else if (f.t === 'column') el = buildColumn(p.id, f);
     else if (f.t === 'select') el = buildSelect(p.id, f, p.id + '__' + f.k);
     else if (f.t === 'img') el = buildImg(p.id, f, p.id + '__' + f.k);
+    else if (f.t === 'video') { const v = h('video', { src: f.src, autoplay: true, muted: true, loop: true, playsinline: true, controls: true, preload: 'metadata', 'aria-label': f.label }); v.muted = true; el = h('figure', { class: 'vid' }, v, h('figcaption', { class: 't-cap' }, f.label)); }
     else el = buildText(p.id, f, p.id + '__' + f.k);
     if (dateMid && f.k === 'numero') dateMid.append(el); else body.append(el);
   }
@@ -520,10 +524,11 @@ function paint(key){
     if (c.sel.value !== v) c.sel.value = v;
     c.wrap.classList.toggle('empty', !has);
   } else if (c.img) {
-    c.img.hidden = !has; if (has) c.img.src = v; else c.img.removeAttribute('src');
-    c.ph.hidden = has; c.rm.hidden = !has || mode === 'read';
-    c.box.classList.toggle('noimg', !has);
-    c.wrap.classList.toggle('empty', !has);
+    const iv = has ? v : (c.f.def || ''), ih = iv.length > 0;
+    c.img.hidden = !ih; if (ih) { if (c.img.getAttribute('src') !== iv) c.img.src = iv; } else c.img.removeAttribute('src');
+    c.ph.hidden = ih; c.rm.hidden = !has || mode === 'read';
+    c.box.classList.toggle('noimg', !ih);
+    c.wrap.classList.toggle('empty', !ih);
   }
 }
 function pageHas(p){
@@ -690,6 +695,7 @@ $('#pages').addEventListener('touchend', e => {
   const t = e.changedTouches[0], dx = t.clientX - tx, dy = t.clientY - ty;
   if (Math.abs(dx) > 70 && Math.abs(dy) < 45 && !(tEl && tEl.closest && tEl.closest('textarea,select'))) step(dx < 0 ? 1 : -1);
 });
+for (const k in C) paint(k);
 setPaged(paged);
 let rz; addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(() => { if (paged) showView(viewOf(curPage), false); else refitAll(); }, 150); });
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(refitAll);
