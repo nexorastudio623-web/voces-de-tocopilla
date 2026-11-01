@@ -123,6 +123,8 @@ select option{color:#1C1A16;background:#fff}
 .vid{margin:0;border:1px solid var(--ink);padding:.3rem;background:var(--paper)}
 .vid video{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;background:#000;filter:grayscale(1) contrast(1.1) sepia(.2)}
 .vid figcaption{margin-top:.3rem}
+.vid.fig img{display:block;width:100%;height:auto}
+@media (min-width:640px){.vid.fig{max-width:100%}}
 @media (min-width:640px){.vid{max-width:70%;margin-inline:auto}}
 .read .img.noimg{display:none}
 .read .img .rm,.read .img .ph button{display:none}
@@ -273,8 +275,10 @@ const PAGES = [
       {k:'vuln',t:'text',label:'Vulnerabilidad',ph:'Qué tanto puede afectar a la comunidad, con un ejemplo.',cls:'t-body',rows:3,sub:true},
       {k:'capac',t:'text',label:'Capacidad',ph:'Con qué recursos cuenta la comunidad, con un ejemplo.',cls:'t-body',rows:3,sub:true}
     ]},
+    {k:'suelo',t:'text',label:'El aluvión y los metales pesados',ph:'Cómo un aluvión remueve y dispersa los metales pesados del suelo.',cls:'t-body',rows:6,sub:true},
     {k:'modelo',t:'text',label:'El modelo que analizamos',ph:'Qué modelo elegimos, qué muestra y qué limitaciones tiene, con su razón.',cls:'t-body',rows:6,sub:true},
     {k:'capacidades',t:'text',label:'Lo que tienen el liceo y la comunidad',ph:'Fortalezas y debilidades del PISE del liceo y de la comunidad para prevenir, mitigar y adaptarse.',cls:'t-body',rows:6,sub:true},
+    {k:'mapa',t:'fig',src:'media/mapa-evacuacion.jpg',label:'Plano de evacuación ante amenaza de remoción en masa de Tocopilla, edición de junio de 2017. Fuente: ONEMI, hoy SENAPRED, con el Comité Comunal de Protección Civil, el MOP y SERNAGEOMIN. Naranja es el área a evacuar y verde la zona segura. Es una imagen de referencia.'},
     {k:'img',t:'img',label:'Infografía con el mapa de riesgos',ph:'Suban la infografía terminada',tall:true},
     {k:'intro',t:'text',label:'Entrada del artículo',ph:'Presenten el problema en pocas líneas.',cls:'t-body',rows:3},
     {k:'p1',t:'text',label:'Propuesta 1',ph:'Qué se propone, quién lo haría y cómo ayuda.',cls:'t-body',rows:3,sub:true},
@@ -293,6 +297,7 @@ const PAGES = [
     {k:'tendencias',t:'text',label:'Lo que viene',ph:'Al menos dos tendencias globales o nacionales y cómo tocan a Tocopilla.',cls:'t-body',rows:5,sub:true},
     {k:'cita',t:'line',label:'Frase destacada',ph:'Una frase fuerte del texto, pa destacarla en grande',cls:'t-pull',pre:'“',post:'”'},
     {k:'mecanismos',t:'text',label:'Qué protege a los trabajadores',ph:'Cómo han evolucionado al menos dos mecanismos institucionales de protección laboral.',cls:'t-body',rows:5,sub:true},
+    {k:'org',t:'text',label:'Una organización social y sus aportes',ph:'Qué organización de Tocopilla eligieron y al menos tres aportes que hace a la comunidad.',cls:'t-body',rows:6,sub:true},
     {k:'entrevistado',t:'line',label:'Persona entrevistada',ph:'Nombre y a qué se dedica o qué organización representa',cls:'t-name',pre:'Entrevistado: '},
     {k:'entrevista',t:'text',label:'Entrevista',ph:'Preguntas y respuestas de la entrevista.',cls:'t-body',rows:6,sub:true},
     {k:'cierre',t:'text',label:'Cierre',ph:'Qué significa trabajo digno en Tocopilla hoy y qué desafíos quedan.',cls:'t-body',rows:4,sub:true}
@@ -486,6 +491,7 @@ function buildSheet(p){
     else if (f.t === 'column') el = buildColumn(p.id, f);
     else if (f.t === 'select') el = buildSelect(p.id, f, p.id + '__' + f.k);
     else if (f.t === 'img') el = buildImg(p.id, f, p.id + '__' + f.k);
+    else if (f.t === 'fig') el = h('figure', { class: 'vid fig' }, h('img', { src: f.src, alt: 'Plano de evacuación de Tocopilla', loading: 'lazy' }), h('figcaption', { class: 't-cap' }, f.label));
     else if (f.t === 'video') { const v = h('video', { src: f.src, autoplay: true, muted: true, loop: true, playsinline: true, controls: true, preload: 'metadata', 'aria-label': f.label }); v.muted = true; el = h('figure', { class: 'vid' }, v, h('figcaption', { class: 't-cap' }, f.label)); }
     else el = buildText(p.id, f, p.id + '__' + f.k);
     if (dateMid && f.k === 'numero') dateMid.append(el); else body.append(el);
