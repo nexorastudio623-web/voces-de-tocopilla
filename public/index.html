@@ -124,6 +124,23 @@ select option{color:#1C1A16;background:#fff}
 .vid video{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;background:#000;filter:grayscale(1) contrast(1.1) sepia(.2)}
 .vid figcaption{margin-top:.3rem}
 .vid.fig img{display:block;width:100%;height:auto}
+.info{display:grid;gap:.7rem}
+.info .band{background:var(--ink);color:var(--paper);padding:.5rem .7rem;font-family:var(--f-black);font-size:clamp(1.4rem,5vw,2rem);line-height:1.1;text-align:center}
+.info .band small{display:block;font-family:var(--f-type);font-size:.78rem;letter-spacing:.04em}
+.info h4{margin:0 0 .25rem;font-family:var(--f-sc);font-weight:400;font-size:1.15rem;color:var(--red);border-bottom:1px solid var(--ink)}
+.info .ib{border:1px solid var(--ink);padding:.5rem .6rem}
+.info .i3{display:grid;gap:.5rem}
+@media (min-width:640px){.info .i3{grid-template-columns:repeat(3,1fr)}}
+.info .bar{display:grid;grid-template-columns:8.5rem 1fr;gap:.5rem;align-items:center;font-size:.85rem;margin:.25rem 0}
+.info .bar span{display:block;background:var(--faint);height:.9rem}
+.info .bar i{display:block;height:.9rem;background:var(--red)}
+.info .lg{display:flex;gap:1rem;flex-wrap:wrap;font-family:var(--f-type);font-size:.8rem;margin-top:.3rem}
+.info .sw{display:inline-block;width:.9rem;height:.9rem;border:1px solid var(--ink);vertical-align:-.1rem;margin-right:.3rem}
+.info img{display:block;width:100%;height:auto;border:1px solid var(--ink)}
+.info p,.info li{margin:.2rem 0;font-size:.92rem;line-height:1.45}
+.info ol,.info ul{margin:.2rem 0 0;padding-left:1.15rem}
+.info .src{font-family:var(--f-type);font-size:.72rem;color:var(--muted)}
+
 @media (min-width:640px){.vid.fig{max-width:100%}}
 @media (min-width:640px){.vid{max-width:70%;margin-inline:auto}}
 .read .img.noimg{display:none}
@@ -344,6 +361,12 @@ const PAGES = [
     'Es el espacio para jugar con el lenguaje, pero igual pasa por la revisión entre pares.',
     'Cierren con las fuentes consultadas y los créditos.'
   ]},
+  {n:11, id:'p11', sec:'Ciencias para la Ciudadanía', kick:'Infografía · Riesgo de aluvión en Tocopilla', tk:'titular', fields:[
+    {k:'titular',t:'line',label:'Título',ph:'Infografía',cls:'t-title'},
+    {k:'info',t:'info'}
+  ], guide:[
+    'Infografía clara y ordenada, con el mapa de las zonas afectadas.'
+  ]},
 ];
 
 const $ = s => document.querySelector(s);
@@ -469,6 +492,39 @@ function buildColumn(pid, f){
   return box;
 }
 
+function buildInfo(){
+  const d = h('div', { class: 'info' });
+  d.innerHTML = [
+    '<div class="band">Aluvión en Tocopilla<small>Qué pasó, qué nos expone y cómo nos cuidamos</small></div>',
+    '<div class="ib"><h4>Qué pasó</h4><p>El 18 de agosto de 2026 llovió fuerte y se activaron las quebradas. Bajaron agua, barro y piedras, hubo calles tapadas, casas afectadas y evacuaciones en las zonas más peligrosas.</p></div>',
+    '<div class="i3">',
+    '<div class="ib"><h4>Amenaza</h4><p>Lo que puede hacernos daño: lluvias fuertes que activan las quebradas y terminan en aluvión.</p></div>',
+    '<div class="ib"><h4>Vulnerabilidad</h4><p>Qué tan expuestos estamos: casas donde baja el barro, infraestructura que no aguanta y sectores donde cuesta evacuar.</p></div>',
+    '<div class="ib"><h4>Capacidad</h4><p>Con lo que contamos: alertas, planes de evacuación, vecinos organizados e instituciones coordinadas.</p></div>',
+    '</div>',
+    '<div class="ib"><h4>Mapa de riesgo y evacuación</h4><img src="media/mapa-evacuacion.jpg" alt="Plano de evacuación de Tocopilla ante amenaza de remoción en masa" loading="lazy">',
+    '<div class="lg"><span><i class="sw" style="background:#E08A1E"></i>Área a evacuar</span><span><i class="sw" style="background:var(--ok)"></i>Zona segura</span></div>',
+    '<p class="src">Plano de referencia de ONEMI, hoy SENAPRED, con el Comité Comunal de Protección Civil, el MOP y SERNAGEOMIN. Edición de junio de 2017.</p></div>',
+    '<div class="ib"><h4>Lo que mostró el imán en 4 muestras de suelo</h4>',
+    '<div class="bar"><b>1 · Norte, Tres Marías</b><span><i style="width:66%"></i></span></div>',
+    '<div class="bar"><b>2 · Cuestas</b><span><i style="width:66%"></i></span></div>',
+    '<div class="bar"><b>3 · Campamento La Patria</b><span><i style="width:100%"></i></span></div>',
+    '<div class="bar"><b>4 · Desierto Pescano Escoloso</b><span><i style="width:100%"></i></span></div>',
+    '<p class="src">Cantidad de partículas atraídas, escala del grupo: mediana o mucha. El imán solo atrae hierro y magnetita, así que no prueba contaminación. Para saberlo hacen falta análisis de laboratorio.</p></div>',
+    '<div class="ib"><h4>Qué proponemos</h4><ol>',
+    '<li>Agregar al PISE del liceo un protocolo de aluvión, con zonas de seguridad, vías de evacuación y un simulacro al año.</li>',
+    '<li>Medir seguido el aire, el suelo y el agua, y contarle los resultados a la comunidad en palabras que se entiendan.</li>',
+    '<li>Que autoridades, empresas, organizaciones y colegios trabajen juntos para prevenir.</li>',
+    '</ol></div>',
+    '<div class="ib"><h4>Si suena la alerta</h4><ul>',
+    '<li>Conocer la zona segura y por dónde evacuar.</li>',
+    '<li>Mantener despejadas las vías de evacuación.</li>',
+    '<li>Seguir solo las alertas oficiales.</li>',
+    '</ul></div>',
+    '<p class="src">Fuentes: ONEMI 2017, Emol y Meganoticias del 18 de agosto de 2026, estudio de la Universidad de Antofagasta 2023, muestras y PISE del grupo.</p>'
+  ].join('');
+  return d;
+}
 function buildSheet(p){
   const sheet = h('section', { class: 'sheet' + (p.cover ? ' cover' : ''), id: 'pag' + p.n, 'aria-label': 'Página ' + p.n + ', ' + p.sec });
   const body = h('div', { class: 'body' });
@@ -494,6 +550,7 @@ function buildSheet(p){
     else if (f.t === 'select') el = buildSelect(p.id, f, p.id + '__' + f.k);
     else if (f.t === 'img') el = buildImg(p.id, f, p.id + '__' + f.k);
     else if (f.t === 'fig') el = h('figure', { class: 'vid fig' }, h('img', { src: f.src, alt: 'Plano de evacuación de Tocopilla', loading: 'lazy' }), h('figcaption', { class: 't-cap' }, f.label));
+    else if (f.t === 'info') el = buildInfo();
     else if (f.t === 'video') { const v = h('video', { src: f.src, autoplay: true, muted: true, loop: true, playsinline: true, controls: true, preload: 'metadata', 'aria-label': f.label }); v.muted = true; el = h('figure', { class: 'vid' }, v, h('figcaption', { class: 't-cap' }, f.label)); }
     else el = buildText(p.id, f, p.id + '__' + f.k);
     if (dateMid && f.k === 'numero') dateMid.append(el); else body.append(el);
@@ -635,7 +692,7 @@ setStatus('saving', 'Conectando');
 
 /* ---------- hojear y presentar ---------- */
 function isWide(){ return innerWidth >= 1100; }
-function viewsList(){ return isWide() ? [[1],[2,3],[4,5],[6,7],[8,9],[10]] : PAGES.map(p => [p.n]); }
+function viewsList(){ return isWide() ? [[1],[2,3],[4,5],[6,7],[8,9],[10,11]] : PAGES.map(p => [p.n]); }
 function viewOf(n){ const i = viewsList().findIndex(v => v.includes(n)); return i < 0 ? 0 : i; }
 function showView(i, animate){
   const V = viewsList(); i = Math.max(0, Math.min(V.length - 1, i)); const show = V[i]; curPage = show[0];
