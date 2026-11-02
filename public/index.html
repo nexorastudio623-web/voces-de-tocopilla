@@ -109,7 +109,7 @@ select option{color:#1C1A16;background:#fff}
 .read .wc{display:none}
 .trio{display:grid;gap:.9rem}
 .col4{display:grid;gap:.4rem;padding-top:.2rem}
-.read .col4.empty{display:none}
+.read .col4.empty{display:none}.read .col4 .print.t-body{column-count:2;column-gap:1.1rem;column-rule:1px solid var(--ink);text-align:justify}.read .col4{border-top:2px solid var(--ink);padding-top:.5rem}.col4 .t-sub{font-weight:700;font-size:1.2rem;line-height:1.15}
 
 /* fotos en blanco y negro, como salen en la prensa */
 .img{position:relative;width:100%;aspect-ratio:4/3;border:1px solid var(--ink);padding:.3rem;background:var(--paper)}
@@ -130,7 +130,7 @@ select option{color:#1C1A16;background:#fff}
 .row3{display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem;align-items:start}
 .row3 .img,.row3 .vid{max-width:100%;margin:0;aspect-ratio:1/1;padding:.15rem}
 .row3 .vid video{aspect-ratio:1/1;height:100%}
-.read .pg-p5 .fit,.read .pg-p6 .fit,.read .pg-p10 .fit{display:block;column-count:2;column-gap:1.2rem;column-rule:1px solid var(--ink)}
+.read .pg-p5 .fit,.read .pg-p6 .fit{display:block;column-count:2;column-gap:1.2rem;column-rule:1px solid var(--ink)}
 .read .pg-p5 .fit>*,.read .pg-p6 .fit>*{margin-bottom:.5rem}
 .read .cover .img{aspect-ratio:16/9;width:42%;margin-inline:auto}
 .read .cover .logo{font-size:2.8rem;line-height:1}
@@ -501,8 +501,10 @@ function buildColumn(pid, f){
   const ka = pid + '__' + f.k + '_autor', kt = pid + '__' + f.k + '_texto';
   const a = buildText(pid, { k: f.k + '_autor', t: 'line', label: 'Columna de opinión ' + f.n, ph: 'Nombre del integrante', cls: 't-name', pre: 'Por ', sub: true }, ka);
   const t = buildText(pid, { k: f.k + '_texto', t: 'text', label: 'Texto de la columna', ph: 'Tesis, dos argumentos, una objeción con su respuesta y una conclusión.', cls: 't-body', rows: 8, words: [300, 400] }, kt);
-  const box = h('div', { class: 'col4 empty' }, a, t);
-  C[ka].group = box; C[kt].group = box;
+  const kti = pid + '__' + f.k + '_titulo';
+  const ti = buildText(pid, { k: f.k + '_titulo', t: 'line', label: 'Título de la columna', ph: 'Un título corto y fuerte', cls: 't-sub', sub: true }, kti);
+  const box = h('div', { class: 'col4 empty' }, ti, a, t);
+  C[ka].group = box; C[kt].group = box; C[kti].group = box;
   return box;
 }
 
