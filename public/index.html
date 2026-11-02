@@ -124,6 +124,9 @@ select option{color:#1C1A16;background:#fff}
 .vid video{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;background:#000;filter:grayscale(1) contrast(1.1) sepia(.2)}
 .vid figcaption{margin-top:.3rem}
 .vid.fig img{display:block;width:100%;height:auto}
+.fit{display:flex;flex-direction:column;gap:.9rem}
+.read .sheet{overflow:hidden}
+.read .body{min-height:0;overflow:hidden}
 .info{display:grid;gap:.7rem}
 .info .band{background:var(--ink);color:var(--paper);padding:.5rem .7rem;font-family:var(--f-black);font-size:clamp(1.4rem,5vw,2rem);line-height:1.1;text-align:center}
 .info .band small{display:block;font-family:var(--f-type);font-size:.78rem;letter-spacing:.04em}
@@ -296,8 +299,6 @@ const PAGES = [
     {k:'suelo',t:'text',label:'El aluvión y los metales pesados',ph:'Cómo un aluvión remueve y dispersa los metales pesados del suelo.',cls:'t-body',rows:6,sub:true},
     {k:'modelo',t:'text',label:'El modelo que analizamos',ph:'Qué modelo elegimos, qué muestra y qué limitaciones tiene, con su razón.',cls:'t-body',rows:6,sub:true},
     {k:'capacidades',t:'text',label:'Lo que tienen el liceo y la comunidad',ph:'Fortalezas y debilidades del PISE del liceo y de la comunidad para prevenir, mitigar y adaptarse.',cls:'t-body',rows:6,sub:true},
-    {k:'mapa',t:'fig',src:'media/mapa-evacuacion.jpg',label:'Plano de evacuación ante amenaza de remoción en masa de Tocopilla, edición de junio de 2017. Fuente: ONEMI, hoy SENAPRED, con el Comité Comunal de Protección Civil, el MOP y SERNAGEOMIN. Naranja es el área a evacuar y verde la zona segura. Es una imagen de referencia.'},
-    {k:'img',t:'img',label:'Infografía con el mapa de riesgos',ph:'Suban la infografía terminada',tall:true},
     {k:'p1',t:'text',label:'Propuesta 1',ph:'Qué se propone, quién lo haría y cómo ayuda.',cls:'t-body',rows:3,sub:true},
     {k:'p2',t:'text',label:'Propuesta 2',ph:'Qué se propone, quién lo haría y cómo ayuda.',cls:'t-body',rows:3,sub:true},
     {k:'p3',t:'text',label:'Propuesta 3',ph:'Qué se propone, quién lo haría y cómo ayuda.',cls:'t-body',rows:3,sub:true}
@@ -369,6 +370,7 @@ const PAGES = [
   ]},
 ];
 
+{ const order = ['p1','p3','p4','p5','p11','p6','p7','p8','p9','p10']; const all = PAGES.slice(); PAGES.length = 0; order.forEach((id, i) => { const p = all.find(x => x.id === id); p.n = i + 1; PAGES.push(p); }); }
 const $ = s => document.querySelector(s);
 function h(tag, props, ...kids){
   const e = document.createElement(tag);
@@ -557,6 +559,7 @@ function buildSheet(p){
   }
   if (p.cover) body.append(h('div', { class: 'adentro' }, h('h3', null, 'Adentro'), h('ul', { id: 'adentro' })));
   if (p.guide) body.append(h('details', { class: 'guide' }, h('summary', null, 'Qué pide el profe en esta página'), h('ul', null, p.guide.map(g => h('li', null, g)))));
+  { const inner = h('div', { class: 'fit' }); while (body.firstChild) inner.append(body.firstChild); body.append(inner); }
   sheet.append(body);
   if (!p.cover) sheet.append(h('div', { class: 'folio' }, '— ' + p.n + ' —  ·  impreso en Tocopilla'));
   return sheet;
@@ -692,7 +695,28 @@ setStatus('saving', 'Conectando');
 
 /* ---------- hojear y presentar ---------- */
 function isWide(){ return innerWidth >= 1100; }
-function viewsList(){ return isWide() ? [[1],[2,3],[4,5],[6,7],[8,9],[10,11]] : PAGES.map(p => [p.n]); }
+function fitSheet(sh){
+  const b = sh.querySelector('.body'), f = b && b.querySelector('.fit'); if (!f) return;
+  if (!document.body.classList.contains('read') || sh.hidden) { f.style.zoom = ''; return; }
+  f.style.zoom = '1'; const avail = b.clientHeight;
+  if (avail < 50 || f.getBoundingClientRect().height <= avail) return;
+  let lo = 0.3, hi = 1;
+  for (let i = 0; i < 9; i++) { const m = (lo + hi) / 2; f.style.zoom = String(m); if (f.getBoundingClientRect().height <= avail) lo = m; else hi = m; }
+  f.style.zoom = String(lo);
+}
+let fitT;
+function fitAll(){ clearTimeout(fitT); fitT = setTimeout(() => document.querySelectorAll('.sheet').forEach(fitSheet), 80); }
+function initFit(){
+  const pg = document.getElementById('pages'); if (!pg) return;
+  new MutationObserver(fitAll).observe(pg, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ['hidden', 'class'] });
+  new MutationObserver(fitAll).observe(document.body, { attributes: true, attributeFilter: ['class'] });
+  window.addEventListener('resize', fitAll);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitAll);
+  document.addEventListener('load', fitAll, true);
+  fitAll();
+}
+if (document.readyState === 'complete') initFit(); else window.addEventListener('load', initFit);
+function viewsList(){ return isWide() ? [[1],[2,3],[4,5],[6,7],[8,9],[10]] : PAGES.map(p => [p.n]); }
 function viewOf(n){ const i = viewsList().findIndex(v => v.includes(n)); return i < 0 ? 0 : i; }
 function showView(i, animate){
   const V = viewsList(); i = Math.max(0, Math.min(V.length - 1, i)); const show = V[i]; curPage = show[0];
