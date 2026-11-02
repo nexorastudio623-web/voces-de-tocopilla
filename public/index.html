@@ -270,6 +270,7 @@ const PAGES = [
   ]},
   {n:5, id:'p5', sec:'Ciencias para la Ciudadanía', kick:'Reportaje central · Riesgo, modelo y propuestas', tk:'titular', fields:[
     {k:'titular',t:'line',label:'Título',ph:'Qué tan preparados estamos',cls:'t-title'},
+    {k:'intro',t:'text',label:'Entrada del artículo',ph:'Presenten el problema en pocas líneas.',cls:'t-body',rows:3},
     {k:'trio',t:'group',fields:[
       {k:'amenaza',t:'text',label:'Amenaza',ph:'El fenómeno que puede hacer daño, con un ejemplo de Tocopilla.',cls:'t-body',rows:3,sub:true},
       {k:'vuln',t:'text',label:'Vulnerabilidad',ph:'Qué tanto puede afectar a la comunidad, con un ejemplo.',cls:'t-body',rows:3,sub:true},
@@ -280,7 +281,6 @@ const PAGES = [
     {k:'capacidades',t:'text',label:'Lo que tienen el liceo y la comunidad',ph:'Fortalezas y debilidades del PISE del liceo y de la comunidad para prevenir, mitigar y adaptarse.',cls:'t-body',rows:6,sub:true},
     {k:'mapa',t:'fig',src:'media/mapa-evacuacion.jpg',label:'Plano de evacuación ante amenaza de remoción en masa de Tocopilla, edición de junio de 2017. Fuente: ONEMI, hoy SENAPRED, con el Comité Comunal de Protección Civil, el MOP y SERNAGEOMIN. Naranja es el área a evacuar y verde la zona segura. Es una imagen de referencia.'},
     {k:'img',t:'img',label:'Infografía con el mapa de riesgos',ph:'Suban la infografía terminada',tall:true},
-    {k:'intro',t:'text',label:'Entrada del artículo',ph:'Presenten el problema en pocas líneas.',cls:'t-body',rows:3},
     {k:'p1',t:'text',label:'Propuesta 1',ph:'Qué se propone, quién lo haría y cómo ayuda.',cls:'t-body',rows:3,sub:true},
     {k:'p2',t:'text',label:'Propuesta 2',ph:'Qué se propone, quién lo haría y cómo ayuda.',cls:'t-body',rows:3,sub:true},
     {k:'p3',t:'text',label:'Propuesta 3',ph:'Qué se propone, quién lo haría y cómo ayuda.',cls:'t-body',rows:3,sub:true}
@@ -311,6 +311,8 @@ const PAGES = [
     {k:'titular',t:'line',label:'Título de la sección',ph:'Debate ético',cls:'t-title'},
     {k:'dilema',t:'line',label:'La pregunta filosófica',ph:'Un dilema ético o político de Tocopilla en forma de pregunta',cls:'t-quest'},
     {k:'persp',t:'text',label:'Dos miradas filosóficas',ph:'Confronten al menos dos perspectivas, con sus autores.',cls:'t-body',rows:8,sub:true,cap:true},
+    {k:'tesis',t:'text',label:'Nuestra postura',ph:'Una tesis clara y por qué la defienden.',cls:'t-body',rows:4,sub:true},
+    {k:'objecion',t:'text',label:'Una objeción y nuestra respuesta',ph:'La objeción más fuerte y cómo le responden.',cls:'t-body',rows:5,sub:true},
     {k:'cita',t:'line',label:'Frase destacada',ph:'Una frase fuerte del texto, pa destacarla en grande',cls:'t-pull',pre:'“',post:'”'}
   ], guide:[
     'Formulen un dilema ético o político de Tocopilla como pregunta filosófica.',
