@@ -278,7 +278,8 @@ const PAGES = [
     {k:'titular',t:'line',label:'Título de la editorial',ph:'Un título con postura',cls:'t-title'},
     {k:'texto',t:'text',label:'Editorial',ph:'Escriban la postura del equipo sobre cómo vivir y trabajar de forma digna y segura en Tocopilla.',cls:'t-body',rows:14,words:[300,400],cap:true},
     {k:'cita',t:'line',label:'Frase destacada',ph:'Una frase fuerte del texto, pa destacarla en grande',cls:'t-pull',pre:'“',post:'”'},
-    {k:'firma',t:'line',label:'Firma',ph:'Equipo editorial, 4° Medio',cls:'t-name',pre:'— '}
+    {k:'firma',t:'line',label:'Firma',ph:'Equipo editorial, 4° Medio',cls:'t-name',pre:'— '},
+    {k:'img',t:'img',label:'Foto de la editorial',ph:'Una foto de Tocopilla: el puerto, los cerros, el mar o la gente',tall:true}
   ], guide:[
     'Entre 300 y 400 palabras con la postura del equipo sobre cómo vivir y trabajar de forma digna y segura en Tocopilla.',
     'Antes de escribir, definan propósito, audiencia, género, tema y esquema en la ficha de planificación.',
@@ -290,7 +291,7 @@ const PAGES = [
     {k:'texto',t:'text',label:'Metales en muestras de suelo',ph:'Qué metales aparecen, de dónde pueden venir y qué efectos tienen en la salud.',cls:'t-body',rows:9,sub:true,cap:true},
     {k:'cita',t:'line',label:'Frase destacada',ph:'Una frase fuerte del texto, pa destacarla en grande',cls:'t-pull',pre:'“',post:'”'},
     {k:'img',t:'img',label:'Las cuatro muestras',ph:'Foto de las muestras de suelo en las placas',def:'media/muestras.jpg'},
-    {k:'etiq__img',t:'img',label:'Las etiquetas de las cuatro muestras',ph:'Fotos de las etiquetas de cada bolsa',def:'media/etiquetas.jpg'},
+    {k:'etiq__img',t:'img',label:'Las etiquetas de las cuatro muestras',ph:'Fotos de las etiquetas de cada bolsa'},
     {k:'lupa__img',t:'img',label:'Una muestra con lupa',ph:'Foto de lo que se ve con la lupa',def:'media/lupa.jpg'},
     {k:'lupa',t:'video',src:'media/lupa.mp4',label:'Video de la muestra vista con lupa'},
     {k:'pie',t:'line',label:'Pie de foto',ph:'Qué se ve, dónde y quién la sacó',cls:'t-cap',pre:'Fotos: '}
@@ -322,6 +323,7 @@ const PAGES = [
   ]},
   {n:6, id:'p6', sec:'Educación Ciudadana', kick:'Reportaje central · Trabajo digno en Tocopilla', tk:'titular', fields:[
     {k:'titular',t:'line',label:'Título',ph:'Trabajar con dignidad en Tocopilla',cls:'t-title'},
+    {k:'img',t:'img',label:'Foto del trabajo en Tocopilla',ph:'Una foto del puerto, la pesca, la industria o la gente trabajando',tall:true},
     {k:'actividades',t:'text',label:'Cómo se trabaja hoy',ph:'Las principales actividades laborales de la ciudad, con datos y fuentes.',cls:'t-body',rows:5,sub:true,cap:true},
     {k:'tendencias',t:'text',label:'Lo que viene',ph:'Al menos dos tendencias globales o nacionales y cómo tocan a Tocopilla.',cls:'t-body',rows:5,sub:true},
     {k:'cita',t:'line',label:'Frase destacada',ph:'Una frase fuerte del texto, pa destacarla en grande',cls:'t-pull',pre:'“',post:'”'},
@@ -338,6 +340,7 @@ const PAGES = [
   ]},
   {n:7, id:'p7', sec:'Filosofía', kick:'Filosofía y créditos · Dilema ético, voces creativas y fuentes', tk:'titular', fields:[
     {k:'titular',t:'line',label:'Título de la sección',ph:'Debate ético',cls:'t-title'},
+    {k:'img',t:'img',label:'Foto o imagen del debate',ph:'Una foto o imagen que acompañe la pregunta filosófica',tall:true},
     {k:'dilema',t:'line',label:'La pregunta filosófica',ph:'Un dilema ético o político de Tocopilla en forma de pregunta',cls:'t-quest'},
     {k:'persp',t:'text',label:'Dos miradas filosóficas',ph:'Confronten al menos dos perspectivas, con sus autores.',cls:'t-body',rows:8,sub:true,cap:true},
     {k:'tesis',t:'text',label:'Nuestra postura',ph:'Una tesis clara y por qué la defienden.',cls:'t-body',rows:4,sub:true},
