@@ -127,6 +127,13 @@ select option{color:#1C1A16;background:#fff}
 .fit{display:flex;flex-direction:column;gap:.9rem}
 .read .sheet{overflow:hidden}
 .read .body{min-height:0;overflow:hidden}
+.row3{display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem;align-items:start}
+.row3 .img,.row3 .vid{max-width:100%;margin:0;aspect-ratio:1/1;padding:.15rem}
+.row3 .vid video{aspect-ratio:1/1;height:100%}
+.read .pg-p5 .fit,.read .pg-p6 .fit{display:block;column-count:2;column-gap:1.2rem;column-rule:1px solid var(--ink)}
+.read .pg-p5 .fit>*,.read .pg-p6 .fit>*{margin-bottom:.5rem}
+.read .cover .img{aspect-ratio:16/9}
+.read .cover .adentro{display:none}
 .info{display:grid;gap:.7rem}
 .info .band{background:var(--ink);color:var(--paper);padding:.5rem .7rem;font-family:var(--f-black);font-size:clamp(1.4rem,5vw,2rem);line-height:1.1;text-align:center}
 .info .band small{display:block;font-family:var(--f-type);font-size:.78rem;letter-spacing:.04em}
@@ -528,7 +535,7 @@ function buildInfo(){
   return d;
 }
 function buildSheet(p){
-  const sheet = h('section', { class: 'sheet' + (p.cover ? ' cover' : ''), id: 'pag' + p.n, 'aria-label': 'Página ' + p.n + ', ' + p.sec });
+  const sheet = h('section', { class: 'sheet pg-' + p.id + (p.cover ? ' cover' : ''), id: 'pag' + p.n, 'aria-label': 'Página ' + p.n + ', ' + p.sec });
   const body = h('div', { class: 'body' });
   let dateMid = null;
   if (p.cover) {
@@ -559,7 +566,9 @@ function buildSheet(p){
   }
   if (p.cover) body.append(h('div', { class: 'adentro' }, h('h3', null, 'Adentro'), h('ul', { id: 'adentro' })));
   if (p.guide) body.append(h('details', { class: 'guide' }, h('summary', null, 'Qué pide el profe en esta página'), h('ul', null, p.guide.map(g => h('li', null, g)))));
-  { const inner = h('div', { class: 'fit' }); while (body.firstChild) inner.append(body.firstChild); body.append(inner); }
+  { const inner = h('div', { class: 'fit' }); while (body.firstChild) inner.append(body.firstChild);
+    if (p.id === 'p4') { const row = h('div', { class: 'row3' }); [...inner.children].filter(c => c.matches('.img,.vid')).forEach(c => row.append(c)); const at = inner.querySelector('.fld:last-child'); inner.insertBefore(row, [...inner.children].find(c => c.matches('.fld') && c.querySelector('.t-cap')) || null); }
+    body.append(inner); }
   sheet.append(body);
   if (!p.cover) sheet.append(h('div', { class: 'folio' }, '— ' + p.n + ' —  ·  impreso en Tocopilla'));
   return sheet;
@@ -700,7 +709,7 @@ function fitSheet(sh){
   if (!document.body.classList.contains('read') || sh.hidden) { f.style.zoom = ''; return; }
   f.style.zoom = '1'; const avail = b.clientHeight;
   if (avail < 50 || f.getBoundingClientRect().height <= avail) return;
-  let lo = 0.3, hi = 1;
+  let lo = 0.2, hi = 1;
   for (let i = 0; i < 9; i++) { const m = (lo + hi) / 2; f.style.zoom = String(m); if (f.getBoundingClientRect().height <= avail) lo = m; else hi = m; }
   f.style.zoom = String(lo);
 }
