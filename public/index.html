@@ -127,16 +127,16 @@ select option{color:#1C1A16;background:#fff}
 .fit{display:flex;flex-direction:column;gap:.9rem}
 .read .sheet{overflow:hidden}
 .read .body{min-height:0;overflow:hidden}
-.row3{display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem;align-items:start}
+.row3{display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem;align-items:start}
 .row3 .img,.row3 .vid{max-width:100%;margin:0;aspect-ratio:1/1;padding:.15rem}
 .row3 .vid video{aspect-ratio:1/1;height:100%}
-.read .pg-p5 .fit,.read .pg-p6 .fit{display:block;column-count:2;column-gap:1.2rem;column-rule:1px solid var(--ink)}
+.read .pg-p5 .fit,.read .pg-p6 .fit,.read .pg-p10 .fit{display:block;column-count:2;column-gap:1.2rem;column-rule:1px solid var(--ink)}
 .read .pg-p5 .fit>*,.read .pg-p6 .fit>*{margin-bottom:.5rem}
 .read .cover .img{aspect-ratio:16/9;width:42%;margin-inline:auto}
 .read .cover .logo{font-size:2.8rem;line-height:1}
 .read .cover .dateline,.read .cover .tag{font-size:.7rem}
 .row3 .fld{margin:0}
-.read .cover .adentro{display:none}
+.read .cover .adentro{padding:.25rem .6rem;font-size:.72rem}.read .cover .adentro h3{font-size:.9rem}.read .cover .adentro ul{display:block;column-count:2;column-gap:1rem}.read .cover .adentro li{break-inside:avoid;line-height:1.25}.read .cover .adentro li b{min-width:2rem;font-size:.68rem}
 .info{display:grid;gap:.7rem}
 .info .band{background:var(--ink);color:var(--paper);padding:.5rem .7rem;font-family:var(--f-black);font-size:clamp(1.4rem,5vw,2rem);line-height:1.1;text-align:center}
 .info .band small{display:block;font-family:var(--f-type);font-size:.78rem;letter-spacing:.04em}
@@ -290,6 +290,7 @@ const PAGES = [
     {k:'texto',t:'text',label:'Metales en muestras de suelo',ph:'Qué metales aparecen, de dónde pueden venir y qué efectos tienen en la salud.',cls:'t-body',rows:9,sub:true,cap:true},
     {k:'cita',t:'line',label:'Frase destacada',ph:'Una frase fuerte del texto, pa destacarla en grande',cls:'t-pull',pre:'“',post:'”'},
     {k:'img',t:'img',label:'Las cuatro muestras',ph:'Foto de las muestras de suelo en las placas',def:'media/muestras.jpg'},
+    {k:'etiq__img',t:'img',label:'Las etiquetas de las cuatro muestras',ph:'Fotos de las etiquetas de cada bolsa',def:'media/etiquetas.jpg'},
     {k:'lupa__img',t:'img',label:'Una muestra con lupa',ph:'Foto de lo que se ve con la lupa',def:'media/lupa.jpg'},
     {k:'lupa',t:'video',src:'media/lupa.mp4',label:'Video de la muestra vista con lupa'},
     {k:'pie',t:'line',label:'Pie de foto',ph:'Qué se ve, dónde y quién la sacó',cls:'t-cap',pre:'Fotos: '}
@@ -365,6 +366,7 @@ const PAGES = [
     {k:'titulo',t:'line',label:'Título',ph:'El título de su texto',cls:'t-title'},
     {k:'texto',t:'text',label:'Texto',ph:'Un texto inspirado en Tocopilla.',cls:'t-body',rows:16,cap:true},
     {k:'autor',t:'line',label:'Autor o autora',ph:'Nombre',cls:'t-name',pre:'Por '},
+    {k:'col5',t:'column',n:5},
     {k:'fuentes',t:'text',label:'Fuentes consultadas',ph:'Una fuente por línea.',cls:'t-cap',rows:4,sub:true},
     {k:'creditos',t:'text',label:'Créditos',ph:'Quién hizo qué: redacción, investigación, análisis de riesgos, diseño y fotografías.',cls:'t-cap',rows:4,sub:true}
   ], guide:[
@@ -628,11 +630,11 @@ function refreshMeta(){
     if (has) done++;
     const chip = $('#chip' + p.n); if (chip) chip.classList.toggle('has', has);
   }
-  $('#prog').textContent = done + ' de 9 páginas con texto';
+  $('#prog').textContent = done + ' de ' + PAGES.length + ' páginas con texto';
   const toc = $('#toc'), ad = $('#adentro');
   if (toc) toc.replaceChildren();
   if (ad) ad.replaceChildren();
-  for (const p of PAGES.filter(x => x.n >= 3)) {
+  for (const p of PAGES.filter(x => x.n >= 2)) {
     const title = (S[p.id + '__' + p.tk] || '').trim();
     if (toc) toc.append(h('li', null, h('button', { type: 'button', onclick: () => goTo(p.n) },
       h('span', { class: 'tt' + (title ? '' : ' pend') }, title || 'Por escribir'), h('span', { class: 's' }, p.sec), h('span', { class: 'n' }, String(p.n)))));
