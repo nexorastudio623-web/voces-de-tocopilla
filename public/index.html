@@ -130,7 +130,7 @@ select option{color:#1C1A16;background:#fff}
 .row3{display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem;align-items:start}
 .row3 .img,.row3 .vid{max-width:100%;margin:0;aspect-ratio:1/1;padding:.15rem}
 .row3 .vid video{aspect-ratio:1/1;height:100%}
-.read .pg-p5 .fit,.read .pg-p6 .fit{display:block;column-count:2;column-gap:1.2rem;column-rule:1px solid var(--ink)}
+.read .pg-p5 .fit,.read .pg-p6 .fit,.read .pg-p7 .fit{display:block;column-count:2;column-gap:1.2rem;column-rule:1px solid var(--ink)}
 .read .pg-p5 .fit>*,.read .pg-p6 .fit>*{margin-bottom:.5rem}
 .read .cover .img{aspect-ratio:16/9;width:42%;margin-inline:auto}
 .read .cover .logo{font-size:2.8rem;line-height:1}
@@ -336,29 +336,35 @@ const PAGES = [
     'Expliquen cómo evolucionaron al menos dos mecanismos de protección laboral, por ejemplo el Código del Trabajo, la Ley 21.561 de 40 horas o la Ley Karin.',
     'Incluyan la entrevista a un trabajador, dirigente sindical u organización social.'
   ]},
-  {n:7, id:'p7', sec:'Filosofía', kick:'Reportaje central · Dilema ético', tk:'titular', fields:[
+  {n:7, id:'p7', sec:'Filosofía', kick:'Filosofía y créditos · Dilema ético, voces creativas y fuentes', tk:'titular', fields:[
     {k:'titular',t:'line',label:'Título de la sección',ph:'Debate ético',cls:'t-title'},
     {k:'dilema',t:'line',label:'La pregunta filosófica',ph:'Un dilema ético o político de Tocopilla en forma de pregunta',cls:'t-quest'},
     {k:'persp',t:'text',label:'Dos miradas filosóficas',ph:'Confronten al menos dos perspectivas, con sus autores.',cls:'t-body',rows:8,sub:true,cap:true},
     {k:'tesis',t:'text',label:'Nuestra postura',ph:'Una tesis clara y por qué la defienden.',cls:'t-body',rows:4,sub:true},
     {k:'objecion',t:'text',label:'Una objeción y nuestra respuesta',ph:'La objeción más fuerte y cómo le responden.',cls:'t-body',rows:5,sub:true},
-    {k:'cita',t:'line',label:'Frase destacada',ph:'Una frase fuerte del texto, pa destacarla en grande',cls:'t-pull',pre:'“',post:'”'}
+    {k:'cita',t:'line',label:'Frase destacada',ph:'Una frase fuerte del texto, pa destacarla en grande',cls:'t-pull',pre:'“',post:'”'},
+    {k:'poema_genero',t:'select',label:'Género',options:['Crónica','Poema','Microcuento']},
+    {k:'poema_titulo',t:'line',label:'Título',ph:'El título de su texto',cls:'t-sub'},
+    {k:'poema_texto',t:'text',label:'Texto',ph:'Un texto inspirado en Tocopilla.',cls:'t-body',rows:12,cap:true},
+    {k:'poema_autor',t:'line',label:'Autor o autora',ph:'Nombre',cls:'t-name',pre:'Por '},
+    {k:'fuentes',t:'text',label:'Fuentes consultadas',ph:'Una fuente por línea.',cls:'t-cap',rows:4,sub:true},
+    {k:'creditos',t:'text',label:'Créditos',ph:'Quién hizo qué: redacción, investigación, análisis de riesgos, diseño y fotografías.',cls:'t-cap',rows:4,sub:true}
   ], guide:[
     'Formulen un dilema ético o político de Tocopilla como pregunta filosófica.',
     'Confronten al menos dos perspectivas filosóficas con sus autores.'
   ]},
-  {n:8, id:'p8', sec:'Opinión de los integrantes', kick:'Columnas de opinión · Primera parte', tk:'titular', fields:[
+  {n:8, id:'p8', sec:'Columnas de opinión', kick:'Columnas de opinión · Primera parte', tk:'titular', fields:[
     {k:'titular',t:'line',label:'Título de la página',ph:'Lo que opinamos',cls:'t-title'},
     {k:'col1',t:'column',n:1},{k:'col2',t:'column',n:2}
   ], guide:[
-    'Cada integrante escribe una columna de opinión de 300 a 400 palabras: tesis, dos argumentos, una objeción con su respuesta y una conclusión.',
+    'Cada columna lleva: título, tesis o postura, argumento 1 con evidencia, argumento 2 con evidencia, objeción y respuesta, propuesta y conclusión. De 300 a 400 palabras.',
     'Una opinión justificada y argumentada: definan, describan, expliquen o ejemplifiquen las ideas y conceptos.'
   ]},
-  {n:9, id:'p9', sec:'Opinión de los integrantes', kick:'Columnas de opinión · Segunda parte', tk:'titular', fields:[
+  {n:9, id:'p9', sec:'Columnas de opinión', kick:'Columnas de opinión · Segunda parte', tk:'titular', fields:[
     {k:'titular',t:'line',label:'Título de la página',ph:'Lo que opinamos II',cls:'t-title'},
-    {k:'col3',t:'column',n:3},{k:'col4',t:'column',n:4}
+    {k:'col3',t:'column',n:3},{k:'col4',t:'column',n:4},{k:'col5',t:'column',n:5}
   ], guide:[
-    'Cada integrante escribe una columna de opinión de 300 a 400 palabras: tesis, dos argumentos, una objeción con su respuesta y una conclusión.',
+    'Cada columna lleva: título, tesis o postura, argumento 1 con evidencia, argumento 2 con evidencia, objeción y respuesta, propuesta y conclusión. De 300 a 400 palabras.',
     'Una opinión justificada y argumentada: definan, describan, expliquen o ejemplifiquen las ideas y conceptos.'
   ]},
   {n:10, id:'p10', sec:'Voces creativas y créditos', kick:'Lengua y Literatura · Voces creativas, créditos y fuentes', tk:'titulo', fields:[
@@ -382,7 +388,7 @@ const PAGES = [
   ]},
 ];
 
-{ const order = ['p1','p3','p4','p5','p11','p6','p7','p8','p9','p10']; const all = PAGES.slice(); PAGES.length = 0; order.forEach((id, i) => { const p = all.find(x => x.id === id); p.n = i + 1; PAGES.push(p); }); }
+{ const order = ['p1','p2','p3','p4','p5','p11','p6','p7','p8','p9']; const all = PAGES.slice(); PAGES.length = 0; order.forEach((id, i) => { const p = all.find(x => x.id === id); p.n = i + 1; PAGES.push(p); }); }
 const $ = s => document.querySelector(s);
 function h(tag, props, ...kids){
   const e = document.createElement(tag);
@@ -571,8 +577,7 @@ function buildSheet(p){
     else el = buildText(p.id, f, p.id + '__' + f.k);
     if (dateMid && f.k === 'numero') dateMid.append(el); else body.append(el);
   }
-  if (p.id === 'p3') body.append(h('div', { class: 'adentro' }, h('h3', null, 'Adentro'), h('ul', { id: 'adentro' })));
-  if (p.guide) body.append(h('details', { class: 'guide' }, h('summary', null, 'Qué pide el profe en esta página'), h('ul', null, p.guide.map(g => h('li', null, g)))));
+    if (p.guide) body.append(h('details', { class: 'guide' }, h('summary', null, 'Qué pide el profe en esta página'), h('ul', null, p.guide.map(g => h('li', null, g)))));
   { const inner = h('div', { class: 'fit' }); while (body.firstChild) inner.append(body.firstChild);
     if (p.id === 'p4') { const row = h('div', { class: 'row3' }); [...inner.children].filter(c => c.matches('.vid') || c.querySelector('.img') || c.matches('.img')).forEach(c => row.append(c)); const at = inner.querySelector('.fld:last-child'); inner.insertBefore(row, [...inner.children].find(c => c.matches('.fld') && c.querySelector('.t-cap')) || null); }
     body.append(inner); }
@@ -632,7 +637,7 @@ function refreshMeta(){
     if (has) done++;
     const chip = $('#chip' + p.n); if (chip) chip.classList.toggle('has', has);
   }
-  $('#prog').textContent = done + ' de ' + PAGES.length + ' páginas con texto';
+  $('#prog').textContent = done + ' de ' + PAGES.filter(x => !x.index).length + ' páginas con texto';
   const toc = $('#toc'), ad = $('#adentro');
   if (toc) toc.replaceChildren();
   if (ad) ad.replaceChildren();
