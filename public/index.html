@@ -136,7 +136,7 @@ select option{color:#1C1A16;background:#fff}
 .read .cover .logo{font-size:2.8rem;line-height:1}
 .read .cover .dateline,.read .cover .tag{font-size:.7rem}
 .row3 .fld{margin:0}
-.read .info{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;align-items:start}.read .info>.band,.read .info>.i3,.read .info>.src,.read .info>div:nth-of-type(2){grid-column:1/-1}.read .info>.ib:has(img){grid-column:1;grid-row:span 2}.read .info img{width:100%;height:auto}.pg-p3 .adentro{margin-top:.6rem}.pg-p3 .adentro ul{display:block;column-count:2;column-gap:1.2rem}.pg-p3 .adentro li{break-inside:avoid;line-height:1.3}
+.read .info{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;align-items:start}.read .info>.band,.read .info>.i3,.read .info>.src,.read .info>div:nth-of-type(2){grid-column:1/-1}.read .info>.ib:has(img){grid-column:1;grid-row:span 2}.read .info img{width:100%;height:auto}.read .pg-p4 .print.t-body{column-count:2;column-gap:1.1rem;column-rule:1px solid var(--ink);text-align:justify}.poema{break-inside:avoid;border:1px solid var(--ink);padding:.5rem .7rem;margin:.4rem 0}.pg-p3 .adentro{margin-top:.6rem}.pg-p3 .adentro ul{display:block;column-count:2;column-gap:1.2rem}.pg-p3 .adentro li{break-inside:avoid;line-height:1.3}
 .info{display:grid;gap:.7rem}
 .info .band{background:var(--ink);color:var(--paper);padding:.5rem .7rem;font-family:var(--f-black);font-size:clamp(1.4rem,5vw,2rem);line-height:1.1;text-align:center}
 .info .band small{display:block;font-family:var(--f-type);font-size:.78rem;letter-spacing:.04em}
@@ -285,10 +285,10 @@ const PAGES = [
     'Antes de escribir, definan propósito, audiencia, género, tema y esquema en la ficha de planificación.',
     'Cuiden la coherencia y la cohesión, con conectores variados.'
   ]},
-  {n:4, id:'p4', sec:'Ciencias para la Ciudadanía', kick:'Reportaje central · Riesgo en el suelo de Tocopilla', tk:'titular', fields:[
+  {n:4, id:'p4', sec:'Ciencias para la Ciudadanía', kick:'Columna de opinión · Riesgo en el suelo de Tocopilla', tk:'titular', fields:[
     {k:'titular',t:'line',label:'Título',ph:'Qué hay en el suelo que pisamos',cls:'t-title'},
     {k:'bajada',t:'line',label:'Bajada',ph:'Una o dos líneas que resuman la investigación',cls:'t-sub'},
-    {k:'texto',t:'text',label:'Metales en muestras de suelo',ph:'Qué metales aparecen, de dónde pueden venir y qué efectos tienen en la salud.',cls:'t-body',rows:9,sub:true,cap:true},
+    {k:'texto',t:'text',label:'Columna de opinión sobre las muestras de suelo',ph:'Tesis o postura, argumento 1 con evidencia, argumento 2 con evidencia, objeción y respuesta, propuesta y conclusión.',cls:'t-body',rows:9,sub:true,cap:true,words:[300,400]},
     {k:'cita',t:'line',label:'Frase destacada',ph:'Una frase fuerte del texto, pa destacarla en grande',cls:'t-pull',pre:'“',post:'”'},
     {k:'img',t:'img',label:'Las cuatro muestras',ph:'Foto de las muestras de suelo en las placas',def:'media/muestras.jpg'},
     {k:'etiq__img',t:'img',label:'Las etiquetas de las cuatro muestras',ph:'Fotos de las etiquetas de cada bolsa'},
@@ -582,6 +582,7 @@ function buildSheet(p){
   }
     if (p.guide) body.append(h('details', { class: 'guide' }, h('summary', null, 'Qué pide el profe en esta página'), h('ul', null, p.guide.map(g => h('li', null, g)))));
   { const inner = h('div', { class: 'fit' }); while (body.firstChild) inner.append(body.firstChild);
+    if (p.id === 'p7') { const ks = ['poema_genero','poema_titulo','poema_texto','poema_autor'].map(k => C['p7__' + k]).filter(Boolean).map(c => c.wrap); if (ks.length) { const pw = h('div', { class: 'poema' }); ks[0].before(pw); ks.forEach(e => pw.append(e)); } }
     if (p.id === 'p4') { const row = h('div', { class: 'row3' }); [...inner.children].filter(c => c.matches('.vid') || c.querySelector('.img') || c.matches('.img')).forEach(c => row.append(c)); const at = inner.querySelector('.fld:last-child'); inner.insertBefore(row, [...inner.children].find(c => c.matches('.fld') && c.querySelector('.t-cap')) || null); }
     body.append(inner); }
   sheet.append(body);
