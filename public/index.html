@@ -502,7 +502,7 @@ function buildColumn(pid, f){
   const a = buildText(pid, { k: f.k + '_autor', t: 'line', label: 'Columna de opinión ' + f.n, ph: 'Nombre del integrante', cls: 't-name', pre: 'Por ', sub: true }, ka);
   const t = buildText(pid, { k: f.k + '_texto', t: 'text', label: 'Texto de la columna', ph: 'Tesis, dos argumentos, una objeción con su respuesta y una conclusión.', cls: 't-body', rows: 8, words: [300, 400] }, kt);
   const kti = pid + '__' + f.k + '_titulo';
-  const ti = buildText(pid, { k: f.k + '_titulo', t: 'line', label: 'Título de la columna', ph: 'Un título corto y fuerte', cls: 't-sub', sub: true }, kti);
+  const ti = buildText(pid, { k: f.k + '_titulo', t: 'line', label: 'Título de la columna', ph: 'Un título corto y fuerte', cls: 't-sub' }, kti);
   const box = h('div', { class: 'col4 empty' }, ti, a, t);
   C[ka].group = box; C[kt].group = box; C[kti].group = box;
   return box;
